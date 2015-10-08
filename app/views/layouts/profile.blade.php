@@ -31,20 +31,22 @@
             <a class="navbar-brand" href="{{URL::to('/')}}">ubexchange</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav navbar-right">
-
-                @if(Auth::check())
-                <li><a href="javascript:void(0)">{{Auth::user()->name}}</a></li>
-                <li><a href="{{URL::to('profile/settings')}}">change password</a></li>
-                <li><a href="{{URL::to('logout')}}">logout</a></li>
-                @endif
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control col-lg-8" placeholder="Search">
-                </form>
-            </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control col-lg-8" placeholder="Search">
             </form>
+            <ul class="nav navbar-nav navbar-right">
+                @if(Auth::check())
+                <li class="dropdown">
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">my profile</a></li>
+                        <li><a href="{{URL::to('profile/settings')}}">change password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{URL::to('logout')}}">logout</a></li>
+                    </ul>
+                </li>
+                @endif
+            </ul>
         </div>
     </div>
 </div>

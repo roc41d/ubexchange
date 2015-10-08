@@ -39,6 +39,12 @@ Route::get('register', 'SessionController@register');
 Route::post('register', 'SessionController@handleRegister')->before('csrf');
 Route::get('activate/{key}', 'SessionController@activate');
 
+Route::get('remind', 'SessionController@remind');
+Route::post('remind', 'SessionController@handleRemind');
+Route::get('recovery/{link}', 'SessionController@recovery');
+Route::post('recovery', 'SessionController@handleRecovery');
+
+
 /*
     |--------------------------------------------------------------------------
     | Profile Controller Routes

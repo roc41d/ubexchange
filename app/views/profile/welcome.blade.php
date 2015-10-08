@@ -36,16 +36,6 @@ home
 
   </div>
 </div> <br />
-@if(Auth::check()==NULL)
-<div class="jumbotron">
-  <h1>ubexchange</h1>
-    <p>
-      is a platform where computer enthusiasts all over the University of Buea can ask
-      <em>programming related questions</em> and get answers from lecturers, experience programmers, and more.
-    </p>
-    <p><a href="{{URL::to('register')}}" class="btn btn-primary btn-lg">get started</a></p>
-</div>
-@endif
 
 <div class="row">
     <div class="col-md-8">

@@ -28,13 +28,14 @@ remind
       <div class="panel panel-default">
         <div class="panel-heading"><h3>Forget Password</h3></div>
             <div class="panel-body">
-                <form>
+                {{Form::open(array('url'=>'remind'))}}
                     <p>Forgotten your password? Enter your email address below to begin the reset process.
                     </p>
                     <div class="form-group">
                         <label for="inputEmail" class="control-label">Email</label>
                         <div class="">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="you@example.com">
+                            <input type="text" class="form-control" id="inputEmail" name="email" value="{{ Input::old('email') != NULL ? Input::old('email') : '' }}" placeholder="you@example.com">
+                            <span class="badge alert-danger">{{ ($errors->has('email') ? $errors->first('email') : '') }}</span>
                         </div>
                     </div>
                     <div class="form-group">

@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<div class="navbar navbar-default">
+<div class="navbar navbar-default ">
     <div class="container">
         <div class="navbar-header ">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -38,9 +38,15 @@
                 @endif
 
                 @if(Auth::check())
-                <li><a href="javascript:void(0)">{{Auth::user()->name}}</a></li>
-                <li><a href="{{URL::to('profile/settings')}}">change password</a></li>
-                <li><a href="{{URL::to('logout')}}">logout</a></li>
+                <li class="dropdown">
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">my profile</a></li>
+                        <li><a href="{{URL::to('profile/settings')}}">change password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{URL::to('logout')}}">logout</a></li>
+                    </ul>
+                </li>
                 @endif
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control col-lg-8" placeholder="Search">

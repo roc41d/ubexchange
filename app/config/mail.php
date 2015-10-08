@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'info@nuketeck.com', 'name' => 'techexchange admin'),
+	'from' => array('address' => 'ubex@nuketeck.com', 'name' => 'ubexchange admin'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -81,6 +81,7 @@ return array(
 	*/
 
 	'username' => 'sashaempty88@gmail.com',
+
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Server Password

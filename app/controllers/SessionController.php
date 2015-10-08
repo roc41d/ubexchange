@@ -61,7 +61,7 @@ class SessionController extends BaseController {
 				);
 			Mail::send('emails.activate',$mailData, 
 				function($message) {
-					$message->subject("techexchange account activation");
+					$message->subject("ubexchange account activation");
 					$message->to(Input::get('email'));
 				}
 			);
@@ -84,11 +84,106 @@ class SessionController extends BaseController {
 			$activateAccount->activation_state = "on";
 			$activateAccount->activation_key = NULL;
 			$activateAccount->save();
-			return Redirect::to('/')->with('alertMessage',"account activated, you can now login.");
+			return Redirect::to('login')->with('alertMessage',"account activated, you can now login.");
 		}
 		else {
 			return Redirect::to('/');
 		}
 		
+	}
+
+	public function remind(){
+
+		return View::make('site.remind');
+	}
+
+	public function handleRemind(){
+
+		$validator = Validator::make(
+            Input::all(),
+            array('email' => 'required|email')
+        );
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+            $user = User::where('email', '=', Input::get('email'));
+
+            if ($user->count()) {
+                $user = $user->first();
+
+                $code = str_random(120);
+
+                $user->remind = $code;
+                $user->save();
+
+                $mailData = array(
+                'email' => Input::get('email'),
+                'link' => $code,
+                );
+	            
+	            //return $mailData['email'] . $training->title;
+
+	            Mail::send('emails.remind',$mailData,
+	            	function($message) {
+	                     $message->subject("ubexchange password reset");
+	                     $message->to(Input::get('email'));
+	                 }
+	             );
+
+                return Redirect::back()->with('alertMessage', 'a link has been send to your mail to reset your password.');
+
+
+
+
+            } else {
+                return Redirect::back()->with('alertError', 'we can not find a user with that e-mail address.');
+
+            }
+
+        }
+	}
+
+	public function recovery($link){
+
+		$user = User::where('remind', '=', $link)->first();
+
+		//return var_dump($user->id);
+
+		if ($user->count()) {
+			return View::make('password.reset')->with('user', $user);
+		} else {
+			return Redirect::back()->with('alertError', 'invalid reset code');
+
+		}
+
+	}
+
+	public function handleRecovery(){
+
+		$messages = array(
+            'same'    => 'The :attribute and :other must match.',
+            'required' => 'The :attribute field is required.',
+            'min'       =>'The :attribute must be atleast :min characters'
+        );
+        $editData = Input::all();
+        $editRules = array(
+            'new_password' =>'required|min:8|',
+            'confirm_new_password' => 'required|min:8|same:new_password'
+        );
+
+        $editValidator = Validator::make($editData,$editRules);
+        if($editValidator->fails()) {   
+            return Redirect::back()->withInput()->withErrors($editValidator);
+        } 
+
+        if ($editValidator->passes()) {
+        	$userToUpdate = User::find(Input::get('special'));
+        	$userToUpdate->password = Hash::make(Input::get('new_password'));
+        	$userToUpdate->save();
+
+        	return 'done.';
+        }
 	}
 }
