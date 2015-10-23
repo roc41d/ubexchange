@@ -13,7 +13,65 @@
 
 
 Route::get('/', function () {
-        return View::make('site.home');
+
+    $data['users'] = User::all();
+    $data['questions'] = Question::paginate(5);
+    $data['count'] = Question::all()->count();
+
+        return View::make('site.home')->with($data);
+});
+
+Route::get('questions', function () {
+
+    $data['users'] = User::all();
+    $data['questions'] = Question::paginate(5);
+    $data['count'] = Question::all()->count();
+
+    return View::make('site.questions')->with($data);
+        
+});
+
+Route::get('question/{id}/{slug}', function ($id, $slug) {
+
+    $data['users'] = User::all();
+    $data['qvotes'] = Qvote::where('question_id', '=', $id)->get();
+    $data['question'] = Question::find($id);
+    $data['answers'] = Answer::where('question_id', '=', $id)->get();
+    $data['count'] = Answer::where('question_id', '=', $id)->count();
+    //where('publish', '=', 'on')->orderBy('created_at', 'desc')->paginate(8);
+    //$data['answers'] = DB::select( DB::raw("SELECT * FROM answers WHERE `question_id` = $id") );
+
+        return View::make('site.question')->with($data);
+});
+
+Route::get('users', function () {
+
+    $data['users'] = User::all();
+
+        return $data['users'];
+});
+
+Route::get('user/{id}/{slug}', function ($id, $slug) {
+
+    $data['user'] = User::find($id);
+
+        return $data['user'];
+});
+
+Route::get('unanswer', function () {
+
+    $data['unanswer'] = Question::where('solved', '=', '0')->get();
+
+    return $data['unanswer'];
+});
+
+Route::get('search', function () {
+
+    $data['users'] = User::all();
+    $data['searchResults'] = Question::where('title', 'like', '%'.Input::get('search').'%')->paginate(5);
+        
+        $data['count'] =  $data['searchResults']->count();
+        return View::make('site.searchresults')->with($data);
 });
 
 Route::get('contact_us', function () {
@@ -55,6 +113,8 @@ Route::post('recovery', 'SessionController@handleRecovery');
     */
 Route::controller('profile', 'ProfileController');
 
+Route::controller('votes', 'VoteController');
+
 /*
     |--------------------------------------------------------------------------
     | Search Controller Routes
@@ -63,3 +123,4 @@ Route::controller('profile', 'ProfileController');
     | Routes to handle questions and answers in the public area
     |
     */
+     //$date = date("F j, Y, g:i a");

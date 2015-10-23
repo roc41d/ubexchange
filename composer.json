@@ -6,8 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"intervention/image": "~2.0",
-		"thomaswelton/laravel-gravatar": "~1.0"
+		"cviebrock/eloquent-sluggable": "~2.0",
+		"intervention/image": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

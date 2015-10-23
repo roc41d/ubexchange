@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'techexchange',
+			'database'  => 'ubexchange',
 			'username'  => 'root',
 			'password'  => 'toor',
 			'charset'   => 'utf8',

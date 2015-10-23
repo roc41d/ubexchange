@@ -1,3 +1,40 @@
+body{
+  	background-color: #ffffff;
+}
 #mylable{
 	height: 40px
+}
+
+.sidebar {
+  background-color: #ecf0f1;
+  min-height: 470px;
+  padding-top: 10px;
+}
+i {
+  font-size:22px;
+}
+
+#pad1{
+	padding-left: 70px;
+}
+
+#votes{
+	text-align: center;
+	border: 1px solid gray;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 20px;
+}
+
+#questions{
+	text-align: center;
+	border: 1px solid gray;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#home{
+	border: 1px solid gray;
+	padding: 10px;
+	border-radius: 25px;
 }

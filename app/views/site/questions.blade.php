@@ -35,26 +35,16 @@ home
 
   </div>
 </div> <br />
-@if(Auth::check()==NULL)
-<div class="row" id="home">
-  <h1>Welcome!</h1>
-    <p>
-      ubexchange is a platform where computer enthusiasts all over the University of Buea can ask
-      <em>programming related questions</em> and get answers from lecturers, experience programmers, and more.
-    </p>
-    <p><a href="{{URL::to('register')}}" class="btn btn-primary btn-lg">get started</a></p>
-</div><br />
-@endif
 
 <div class="row">
     <div class="col-sm-9">
-      <h3>Recently Asked Questions</h3><hr />
+      <h3>All Questions</h3><hr />
       @foreach($questions as $question)
       <div class="row">
         <div class="col-sm-1" id="questions">
             {{$question->votes}}<br />
           <small>votes</small><br /><br />
-            {{Answer::where('question_id','=',$question->id)->count()}}<br />
+          {{Answer::where('question_id','=',$question->id)->count()}}<br />
           <small>answers</small>
         </div>
         <div class="col-sm-11" id="q">

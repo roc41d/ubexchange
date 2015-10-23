@@ -17,6 +17,22 @@
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/material.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/mystyle.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+    </script>
+    <!--<script>tinymce.init({selector:'#answer', valid_elements : '+*[*]'});</script> -->
+    <!--<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script> -->
 
 </head>
 <body>
@@ -39,18 +55,17 @@
 
                 @if(Auth::check())
                 <li class="dropdown">
-                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
+                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">my profile</a></li>
-                        <li><a href="{{URL::to('profile/settings')}}">change password</a></li>
+                        <li><a href="{{URL::to('profile')}}"><i class="fa fa-gear"></i>&nbsp;&nbsp;settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{URL::to('logout')}}">logout</a></li>
+                        <li><a href="{{URL::to('logout')}}"> <i class="fa fa-sign-out"></i>&nbsp;&nbsp;logout</a></li>
                     </ul>
                 </li>
                 @endif
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control col-lg-8" placeholder="Search">
-                </form>
+                {{Form::open(array('url'=>'search', 'method'=>'get', 'class'=>'navbar-form navbar-right'))}}
+                    <input type="text" class="form-control col-lg-8" name="search" placeholder="Search">
+                {{Form::close()}}
             </ul>
         </div>
     </div>

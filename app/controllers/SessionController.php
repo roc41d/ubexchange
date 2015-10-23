@@ -41,7 +41,7 @@ class SessionController extends BaseController {
 		$registerRules = array(
 			'name'					=>'required|unique:users|alpha_dash|min:4',
 			'email'	  				=>'required|email|unique:users',
-			'password'				=>'required|alpha_num|min:4',
+			'password'				=>'required|alpha_num|min:6',
 			'comfirmed_password'	=>'required|alpha_num|same:password',
 			'terms'	   				=>'required'
 			);
@@ -132,13 +132,13 @@ class SessionController extends BaseController {
 	                 }
 	             );
 
-                return Redirect::back()->with('alertMessage', 'a link has been send to your mail to reset your password.');
+                return Redirect::back()->with('alertMessage', 'a link has been send to your email to reset your password.');
 
 
 
 
             } else {
-                return Redirect::back()->with('alertError', 'we can not find a user with that e-mail address.');
+                return Redirect::back()->with('alertError', 'we can not find a user with that email address.');
 
             }
 
@@ -169,8 +169,8 @@ class SessionController extends BaseController {
         );
         $editData = Input::all();
         $editRules = array(
-            'new_password' =>'required|min:8|',
-            'confirm_new_password' => 'required|min:8|same:new_password'
+            'new_password' =>'required|min:6',
+            'confirm_new_password' => 'required|same:new_password'
         );
 
         $editValidator = Validator::make($editData,$editRules);
@@ -183,7 +183,7 @@ class SessionController extends BaseController {
         	$userToUpdate->password = Hash::make(Input::get('new_password'));
         	$userToUpdate->save();
 
-        	return 'done.';
+        	return 'done.'; //to user profile index page
         }
 	}
 }

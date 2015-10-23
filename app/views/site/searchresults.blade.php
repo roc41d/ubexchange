@@ -3,7 +3,7 @@
 {{-- web site title --}}
 @section('title')
 @parent
-home
+search
 @stop
 
 {{-- website content --}}
@@ -35,26 +35,16 @@ home
 
   </div>
 </div> <br />
-@if(Auth::check()==NULL)
-<div class="row" id="home">
-  <h1>Welcome!</h1>
-    <p>
-      ubexchange is a platform where computer enthusiasts all over the University of Buea can ask
-      <em>programming related questions</em> and get answers from lecturers, experience programmers, and more.
-    </p>
-    <p><a href="{{URL::to('register')}}" class="btn btn-primary btn-lg">get started</a></p>
-</div><br />
-@endif
 
 <div class="row">
     <div class="col-sm-9">
-      <h3>Recently Asked Questions</h3><hr />
-      @foreach($questions as $question)
+      <h3>{{$count}} resutl(s)</h3><hr />
+      @foreach($searchResults as $question)
       <div class="row">
         <div class="col-sm-1" id="questions">
-            {{$question->votes}}<br />
+            {{Qvote::where('question_id','=',$question->id)->count()}}<br />
           <small>votes</small><br /><br />
-            {{Answer::where('question_id','=',$question->id)->count()}}<br />
+          {{Answer::where('question_id','=',$question->id)->count()}}<br />
           <small>answers</small>
         </div>
         <div class="col-sm-11" id="q">
@@ -64,17 +54,13 @@ home
         </div>
       </div><hr >
        @endforeach
-       {{$questions->links()}}
+       {{$searchResults->links()}}
 
 
 
     </div>
 
     <div class="col-sm-3">
-        <h4>
-          {{$count}}<br />
-          <small>questions</small>
-        </h4>
         <img src="http://placehold.it/260x500">
     </div>
 </div>

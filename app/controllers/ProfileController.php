@@ -8,11 +8,15 @@ class ProfileController extends BaseController
 
     public function getIndex() {
 
-        /*if(User::find(User::find(Auth::user())->id) == 1){
-            return 'upload profile photo';//View::make('profile.welcome');
-        }*/
-        return 'profile index page';//View::make('profile.index');
+        $data['user'] = User::find(Auth::user()->id);
 
+        return View::make('profile.index')->with($data);
+
+    }
+
+    public function getActivity() {
+
+        return View::make('profile.activity');
     }
 
     //=====================================================
@@ -46,7 +50,7 @@ class ProfileController extends BaseController
                 $user->password = Hash::make($new_password);
 
                 if ($user->save()) {
-                    return Redirect::back()->with('alertMessage', 'your password has been changed.');
+                    return Redirect::to('profile')->with('alertMessage', 'your password has been changed.');
                 }
 
             } else {
@@ -61,5 +65,72 @@ class ProfileController extends BaseController
     //=====================================================
     //  end change user password
     //=====================================================
+
+
+    //=====================================================
+    //  ask question methods
+    //=====================================================
+    public function getAskquestion(){
+
+        if (Auth::check()== NULL) {
+
+            return Redirect::to('login')
+                 ->with('alertError', "you must be logged in to ask a question on UbExchange<br /> log in below or sign up");
+            
+        }
+        return View::make('profile.askquestion');
+
+    }
+
+    public function postAskquestion(){
+        $registerData = Input::all();
+        $registerRules = array(
+            'title'     =>'required',
+            'body'      =>'required',
+            );
+        $registerValidator = Validator::make($registerData,$registerRules);
+        if($registerValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($registerValidator);
+        }
+        if( $registerValidator->passes()) {
+            $question = new Question();
+            $question->title = Input::get('title');
+            $question->description = Input::get('body');
+            $question->user_id = Auth::user()->id;
+            $question->save();
+            
+
+            return Redirect::to('profile')->with('alertMessage',"question posted successfully.");
+        }
+
+    }
+
+
+    //=====================================================
+    //  answer question methods
+    //=====================================================
+
+    public function postAnswer(){
+        $registerData = Input::all();
+        $registerRules = array(
+            'answer'     =>'required',
+            );
+        $registerValidator = Validator::make($registerData,$registerRules);
+        if($registerValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($registerValidator);
+        }
+        if($registerValidator->passes()) {
+            $answer = new Answer();
+            $answer->user_id = Auth::user()->id;
+            $answer->question_id = Input::get('special');
+            $answer->description = Input::get('answer');
+            $answer->save();
+            
+
+            return Redirect::back()->with('alertMessage',"answer posted successfully.");
+        }
+
+    }
+
     
 }
