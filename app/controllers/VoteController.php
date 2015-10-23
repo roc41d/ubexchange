@@ -4,6 +4,10 @@ class VoteController extends BaseController {
 
 	public function getUpvotequestion($id) {
 
+		if (Auth::check() == NULL) {
+			return Redirect::back()->with('alertError', "you have to be loggin to perform this action.");
+		}
+
 		$hasUserVoted = Qvote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('question_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			
@@ -31,6 +35,10 @@ class VoteController extends BaseController {
 
 	public function getDownvotequestion($id) {
 
+		if (Auth::check() == NULL) {
+			return Redirect::back()->with('alertError', "you have to be loggin to perform this action.");
+		}
+
 		$hasUserVoted = Qvote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('question_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			$vote =  new Qvote();
@@ -52,6 +60,10 @@ class VoteController extends BaseController {
 
 	public function getUpvoteanswer($id){
 
+		if (Auth::check() == NULL) {
+			return Redirect::back()->with('alertError', "you have to be loggin to perform this action.");
+		}
+
 		$hasUserVoted = Avote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('answer_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			
@@ -72,6 +84,10 @@ class VoteController extends BaseController {
 	}
 
 	public function getDownvoteanswer($id){
+
+		if (Auth::check() == NULL) {
+			return Redirect::back()->with('alertError', "you have to be loggin to perform this action.");
+		}
 
 		$hasUserVoted = Avote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('answer_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
