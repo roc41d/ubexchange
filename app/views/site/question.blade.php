@@ -49,7 +49,15 @@
         
         <div class="col-sm-11" id="q">
           <p>{{$question->description}}</p>
-          <small class="pull-right">ask {{date("F jS, Y -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
+          @if(Auth::check())
+          <small><a href="{{URL::to('profile/editquestion/'. $question->id. '/'. $question->slug)}}">edit</a></small>
+          @endif
+          <p class="pull-right">
+              @if($question->user_edit_id > 0)
+              <small id="editbyswag">edited {{date("F jS -- g:i A",strtotime($question->edit_time))}} by: <a href="{{URL::to('user/'. $question->user_edit_id. '/'. $users->find($question->user_edit_id)->name)}}">{{$users->find($question->user_edit_id)->name}}</a></small>
+              @endif
+              <small>ask {{date("F jS -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
+          </p>
         </div>
       </div> <br/><br />
 
@@ -63,7 +71,15 @@
         </div>
         <div class="col-sm-11" id="q">
           <p>{{$answer->description}}</p>
-          <small class="pull-right">answered {{date("F jS, Y -- g:i A",strtotime($answer->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($answer->user_id)->name}}</a></small>
+          @if(Auth::check())
+          <small><a href="{{URL::to('profile/editanswer/'. $answer->id)}}">edit</a></small>
+          @endif
+          <p class="pull-right">
+            @if($answer->user_edit_id > 0)
+            <small id="editbyswag">edited {{date("F jS -- g:i A",strtotime($answer->edit_time))}} by: <a href="{{URL::to('user/'. $answer->user_edit_id. '/'. $users->find($answer->user_edit_id)->name)}}">{{$users->find($answer->user_edit_id)->name}}</a></small>
+            @endif
+            <small>answered {{date("F jS -- g:i A",strtotime($answer->created_at))}} by: <a href="{{URL::to('user/'. $answer->user_id. '/'. $users->find($answer->user_id)->name)}}">{{$users->find($answer->user_id)->name}}</a></small>
+          </p>
         </div>
     
       </div><hr />
@@ -92,7 +108,9 @@
                 </div>
           </div>
           @endif
-          <h4><a href="{{URL::to('login')}}">Login</a> or <a href="{{URL::to('register')}}">Sign up</a> to answer this question</h4>
+          @if(Auth::check() == NULL)
+            <h4><a href="{{URL::to('login')}}">Login</a> or <a href="{{URL::to('register')}}">Sign up</a> to answer this question</h4>
+          @endif
       </div>
 
     </div>

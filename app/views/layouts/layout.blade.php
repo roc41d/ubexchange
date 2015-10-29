@@ -84,8 +84,12 @@
         <div class="row">
           <div class="col-lg-12">
             <p>
-            <a href="{{URL::to('contact_us')}}">contact us</a>&nbsp;&nbsp;
+            <a href="{{URL::to('contact_us')}}">tour</a>&nbsp;&nbsp;
+            <a href="{{URL::to('contact_us')}}">help</a>&nbsp;&nbsp;
+            <a href="{{URL::to('contact_us')}}">legal</a>&nbsp;&nbsp;
             <a href="{{URl::to('privacy_policy')}}">privacy policy</a>&nbsp;&nbsp;
+            <a href="{{URL::to('contact_us')}}">contact us</a>&nbsp;&nbsp;
+            <a href="{{URL::to('contact_us')}}">feedback</a>&nbsp;&nbsp;
             <a href=""></a>&nbsp;&nbsp;
             <br>
             &copy; {{date('Y')}} ubexchange Powered by <a href="http://nuketeck.com" target="_blank">Nuketeck.com</a>

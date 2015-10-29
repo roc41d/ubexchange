@@ -38,3 +38,32 @@ i {
 	padding: 10px;
 	border-radius: 25px;
 }
+
+#editbyswag{
+	padding-right: 30px;
+}
+
+#imageswag{
+	width: 140px;
+	height: 140px;
+}
+
+.navswag{
+	background-color: #009688;
+}
+
+#completeswag{
+	text-align: center;
+}
+
+#searchswag{
+	border: 1px solid #eee;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.activityswag{
+	border-bottom: 1px solid gray;
+	padding-bottom: 10px;
+}
+

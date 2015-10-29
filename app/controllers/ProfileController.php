@@ -4,19 +4,86 @@ class ProfileController extends BaseController
 {
 
     public function __construct() {
+        //$this->filter('before', 'auth');
     }
 
     public function getIndex() {
 
         $data['user'] = User::find(Auth::user()->id);
 
+        if ($data['user']->photo == "") {
+
+            $data['count'] = Gravatar::all()->count();
+            $rand = rand(1, $data['count']);
+            $data['gravatar'] = Gravatar::find($rand);
+
+            $data['imageData'] = Identicon::getImageData('rocard');
+            
+            return View::make('profile.complete')->with($data);
+        }
+
+        //return var_dump($data['user']->photo);
+
         return View::make('profile.index')->with($data);
 
     }
 
-    public function getActivity() {
+    public function postUploadpoto(){
+        //$destinationPath = 'photo/';
+        $userEdit = User::find(Auth::user()->id);
 
-        return View::make('profile.activity');
+        // uploading and setting of new logo
+        $photo = bin2hex(openssl_random_pseudo_bytes(20)). '_'. '.'.Input::file('photo')->getClientOriginalExtension();
+        $photo_thumbnail = bin2hex(openssl_random_pseudo_bytes(20)). '_'. 'thumbnail'. '.'.Input::file('photo')->getClientOriginalExtension();
+        Input::file('photo')->move('photo/', $photo);
+        File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
+
+        Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
+
+        $userEdit->photo = $photo;
+        $userEdit->photo_thumbnail = $photo_thumbnail;
+        $userEdit->save();
+
+        return Redirect::to('profile');
+        
+    }
+
+    public function getCompleteregistration($id){
+
+        $gravatar = Gravatar::find($id);
+        $userEdit = User::find(Auth::user()->id);
+
+        $photo = bin2hex(openssl_random_pseudo_bytes(20)). '_'. $gravatar->image;
+        $photo_thumbnail = bin2hex(openssl_random_pseudo_bytes(20)). '_'. 'thumbnail'. '_'.$gravatar->image;
+
+        File::copy('gravatar/'.$gravatar->image, 'photo/'.$photo);
+        File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
+
+        Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
+        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
+
+        $userEdit->photo = $photo;
+        $userEdit->photo_thumbnail = $photo_thumbnail;
+        $userEdit->save();
+
+        return Redirect::to('profile');
+
+    }
+
+    public function getActivity() {
+        $data['userQustions'] = Question::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->paginate(4);
+        $data['questionsCount'] = $data['userQustions']->count();
+
+        $data['userAnswers'] = Answer::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->paginate(4);
+        $data['answersCount'] = $data['userAnswers']->count();
+
+        return View::make('profile.activity')->with($data);
+    }
+
+    public function getEditprofile() {
+
+        return View::make('profile.editprofile');
     }
 
     //=====================================================
@@ -100,7 +167,39 @@ class ProfileController extends BaseController
             $question->save();
             
 
-            return Redirect::to('profile')->with('alertMessage',"question posted successfully.");
+            return Redirect::to('/')->with('alertMessage',"question posted successfully.");
+        }
+
+    }
+
+    public function getEditquestion($id, $slug){
+
+        $data['questionToEdit'] = Question::find($id);
+
+        return View::make('profile.editquestion')->with($data);
+
+    }
+
+    public function postEditquestion(){
+        $registerData = Input::all();
+        $registerRules = array(
+            'title'     =>'required',
+            'body'      =>'required',
+            );
+        $registerValidator = Validator::make($registerData,$registerRules);
+        if($registerValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($registerValidator);
+        }
+        if( $registerValidator->passes()) {
+            $questionToEdit = Question::find(Input::get('special'));
+            $questionToEdit->title = Input::get('title');
+            $questionToEdit->description = Input::get('body');
+            $questionToEdit->user_edit_id = Auth::user()->id;
+            $questionToEdit->edit_time = date("F jS, Y -- g:i A");
+            $questionToEdit->save();
+            
+
+            return Redirect::to('profile')->with('alertMessage',"question edited successfully.");
         }
 
     }
@@ -128,6 +227,36 @@ class ProfileController extends BaseController
             
 
             return Redirect::back()->with('alertMessage',"answer posted successfully.");
+        }
+
+    }
+
+    public function getEditanswer($id){
+
+        $data['answerToEdit'] = Answer::find($id);
+
+        return View::make('profile.editanswer')->with($data);
+
+    }
+
+    public function postEditanswer(){
+        $registerData = Input::all();
+        $registerRules = array(
+            'answer'     =>'required',
+            );
+        $registerValidator = Validator::make($registerData,$registerRules);
+        if($registerValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($registerValidator);
+        }
+        if( $registerValidator->passes()) {
+            $answerToEdit = Answer::find(Input::get('special'));
+            $answerToEdit->description = Input::get('answer');
+            $answerToEdit->user_edit_id = Auth::user()->id;
+            $answerToEdit->edit_time = date("F j, Y, g:i a");
+            $answerToEdit->save();
+            
+
+            return Redirect::to('profile')->with('alertMessage',"question edited successfully.");
         }
 
     }

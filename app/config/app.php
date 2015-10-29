@@ -122,6 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
+		'Irazasyed\LaravelIdenticon\ServiceProvider',
 
 	),
 
@@ -189,6 +191,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+		'Image' 			=> 'Intervention\Image\Facades\Image',
+		'Identicon'  => 'Irazasyed\LaravelIdenticon\Facade',
 
 	),
 

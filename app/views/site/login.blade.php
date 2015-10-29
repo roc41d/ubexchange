@@ -51,10 +51,10 @@ login
                       <div class="form-group">
                            <div class="">
                               <a href="{{URL::to('remind')}}" class="btn btn-danger">Forgot Password</a>
-                              <button type="submit" class="btn btn-success pull-right">Log in</button>
+                              <button type="submit" class="btn btn-primary pull-right">Log in</button>
                           </div>
                       </div>
-                  </form>
+                  {{Form::close()}}
               </div>
       </div>
   </div>

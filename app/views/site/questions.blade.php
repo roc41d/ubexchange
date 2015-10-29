@@ -50,7 +50,7 @@ home
         <div class="col-sm-11" id="q">
           <h4><a href="{{URL::to('question/'. $question->id. '/'. $question->slug)}}">{{$question->title}}</a></h4>
           <p>{{substr(strip_tags($question->description), 0, 250)}}</p>
-          <small class="pull-right">asked {{date("F jS, Y -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
+          <small class="pull-right">asked {{date("F jS -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
         </div>
       </div><hr >
        @endforeach

@@ -22,6 +22,11 @@ class SessionController extends BaseController {
 		    	Auth::logout();
 		    	return Redirect::back()->with('alertError', "contact support@ubexchange.com, your account has been blocked.");
 		    }
+
+		    //$data = date("F j, Y, g:i a");
+		    $userToLoggin = User::where('email', '=', Input::get('email'))->first();
+		    $userToLoggin->last_login = date("F j, Y, g:i a");
+		    $userToLoggin->save();
 		     // redirect user to profile page
 		    return Redirect::to('profile');
 		}

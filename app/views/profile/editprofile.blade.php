@@ -39,44 +39,35 @@ activity
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
   <li><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
-  <li class="active"><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
-  <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
+  <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
+  <li class="active"><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
 </ul>
 </div><br />
 
 
 <div class="row">
-  <div class="col-sm-12">
+  
+  @include('profile.sidebar')
+
+  <div class="col-sm-9">
       <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row">
           <div class="col-md-6">
-            <h4>activities summary</h4>
+            <h4>edit profile and settings</h4>
+          </div>
+          <div class="col-md-6">
+            <a href="#" class="btn btn-success btn-sm pull-right" >Edit account datails</a> 
           </div>
         </div>
       </div>
       <div class="panel-body">
-        <div class="col-md-6">
-          <h5 class="activityswag">{{$questionsCount}} Qusetions</h5>
-          @foreach($userQustions as $question)
-            <div class="row">
-              <div class="col-sm-1" id="questions">
-                  {{$question->votes}}
-              </div>
-              <div class="col-sm-11" id="q">
-                  <h5><a href="{{URL::to('question/'. $question->id. '/'. $question->slug)}}">{{$question->title}}</a></h5>
-              </div>
-            </div><hr >
-          @endforeach
-            <a href="#" class="">more ..</a>
-        </div>
-        <div class="col-md-6">
-          <h5 class="activityswag">{{$answersCount}} Answers</h5>
-          @foreach($userAnswers as $answer)
-            {{-- <p>{{$answer->user_id}}</p> --}}
-          @endforeach
-            <a href="#" class="">more ..</a>
-        </div> <br />
+
+        <h2>
+        <i class="fa fa-chevron-up" ></i><br />
+        <i class="fa fa-check active"></i><br />
+        <i class="fa fa-chevron-down" ></i>
+        </h2>
 
       </div><!--/panel-body-->
   </div><!--/panel-->        

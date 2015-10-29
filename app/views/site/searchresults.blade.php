@@ -34,11 +34,31 @@ search
     </div>
 
   </div>
-</div> <br />
+</div>
 
-<div class="row">
+<div class="row"><br /><br />
     <div class="col-sm-9">
-      <h3>{{$count}} resutl(s)</h3><hr />
+
+    <div class="row" id="searchswag">
+          <div class="col-sm-12">
+            {{Form::open(array('url'=>'search', 'method'=>'get'))}}
+              <div class="input-group">
+                <input type="text" class="form-control" name="search" value="{{Input::get('search')}}" placeholder="Keywords">
+                <span class="input-group-btn" style="padding-left: 15px;">
+                  <button class="btn btn-primary" type="submit">
+                      <span><i class="fa fa-search"></i>search</span>
+                  </button>
+                </span>
+              </div><!-- /input-group -->
+            {{Form::close()}}
+          </div><!-- /.col-lg-6 -->
+      </div><br />
+
+      <h4>{{$count}} resutl(s)</h4><hr />
+      @if($count == 0)
+        <h5>No result found.</h5>
+      @endif
+      <!--<h3>{{$count}} resutl(s)</h3><hr /> -->
       @foreach($searchResults as $question)
       <div class="row">
         <div class="col-sm-1" id="questions">
@@ -49,7 +69,7 @@ search
         </div>
         <div class="col-sm-11" id="q">
           <h4><a href="{{URL::to('question/'. $question->id. '/'. $question->slug)}}">{{$question->title}}</a></h4>
-          <p>{{substr(strip_tags($question->description), 0, 250)}}</p>
+          <p>{{substr(str_ireplace(Input::get('search'), '<mark>'.Input::get('search').'</mark>', $question->description), 0, 250)}}</p>
           <small class="pull-right">asked {{date("F jS, Y -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
         </div>
       </div><hr >

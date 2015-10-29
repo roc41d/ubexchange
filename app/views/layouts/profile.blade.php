@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/bootstrap.css" media="screen">
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/roboto.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/mystyle.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
 
 </head>
 <body>
-<div class="navbar navbar-default">
+<div class="navbar navbar-defualt">
     <div class="container">
         <div class="navbar-header ">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -47,13 +47,18 @@
             <a class="navbar-brand" href="{{URL::to('/')}}">ubexchange</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control col-lg-8" placeholder="Search">
-            </form>
+            {{Form::open(array('url'=>'search', 'method'=>'get', 'class'=>'navbar-form navbar-right'))}}
+                <input type="text" class="form-control col-lg-8" name="search" placeholder="Search">
+            {{Form::close()}}
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
                 <li class="dropdown">
-                    <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}} <b class="caret"></b></a>
+                    <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                    <!--<img src="{{URL::to('gravatar')}}/image_thumbnail.png" class="img-rounded" id="imgswag" />
+                    {{Auth::user()->name}} -->
+                    <i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}}
+                    <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{URL::to('profile')}}"><i class="fa fa-gear"></i>&nbsp;&nbsp;settings</a></li>
                         <li class="divider"></li>
@@ -104,6 +109,13 @@
             $(document).ready(function() {
                 // This command is used to initialize some elements and make them work properly
                 $.material.init();
+            });
+
+            $('#menu > ul.nav-tabs li').click(function(e) {
+                $('.nav li.active').removeClass('active');
+                var $this = $(this);
+                $this.addClass('active');
+                e.preventDefault();
             });
         </script>
 

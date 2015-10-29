@@ -15,7 +15,7 @@
 Route::get('/', function () {
 
     $data['users'] = User::all();
-    $data['questions'] = Question::paginate(5);
+    $data['questions'] = Question::paginate(10);
     $data['count'] = Question::all()->count();
 
         return View::make('site.home')->with($data);
@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('questions', function () {
 
     $data['users'] = User::all();
-    $data['questions'] = Question::paginate(5);
+    $data['questions'] = Question::paginate(10);
     $data['count'] = Question::all()->count();
 
     return View::make('site.questions')->with($data);
@@ -68,7 +68,7 @@ Route::get('unanswer', function () {
 Route::get('search', function () {
 
     $data['users'] = User::all();
-    $data['searchResults'] = Question::where('title', 'like', '%'.Input::get('search').'%')->paginate(5);
+    $data['searchResults'] = Question::where('description', 'like', '%'.Input::get('search').'%')->paginate(10);
         
         $data['count'] =  $data['searchResults']->count();
         return View::make('site.searchresults')->with($data);
@@ -111,9 +111,14 @@ Route::post('recovery', 'SessionController@handleRecovery');
     | Routes to handle user profile
     |
     */
-Route::controller('profile', 'ProfileController');
 
-Route::controller('votes', 'VoteController');
+Route::group(array('before' => 'auth'), function(){
+
+    Route::controller('profile', 'ProfileController');
+
+    Route::controller('votes', 'VoteController');
+
+});
 
 /*
     |--------------------------------------------------------------------------
@@ -123,4 +128,31 @@ Route::controller('votes', 'VoteController');
     | Routes to handle questions and answers in the public area
     |
     */
+
+    Route::get('date', function () {
+
+        //$data = date("F j, Y, g:i a");
+        $data = date('g:i a');
+
+        return $data;
+        
+});
+
+    Route::get('complete', function () {
+
+        return View::make('profile.complete');
+        
+});
+
+    /*Route::get('photo', function () {
+
+        $data['count'] = Gravatar::all()->count();
+        $rand = rand(1, $data['count']);
+        $data['gravatar'] = Gravatar::find($rand);
+
+        //return $rand;
+
+        return $data['gravatar']->image;
+        
+});*/
      //$date = date("F j, Y, g:i a");

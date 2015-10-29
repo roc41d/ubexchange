@@ -50,7 +50,7 @@ register
                        </div>
                       <div class="form-group">
                           <div class="">
-                            <button type="submit" class="btn btn-success pull-right">Join</button>
+                            <button type="submit" class="btn btn-primary pull-right">Join</button>
                           </div>
                       </div>
                   </form>

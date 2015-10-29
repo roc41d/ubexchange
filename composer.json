@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"cviebrock/eloquent-sluggable": "~2.0",
-		"intervention/image": "~2.0"
+		"intervention/image": "~2.0",
+		"irazasyed/laravel-identicon": "~1.1"
 	},
 	"autoload": {
 		"classmap": [

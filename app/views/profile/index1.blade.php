@@ -25,7 +25,7 @@ home
 
 <div class="row">
   <div class="col-md-4">
-      <p>some text ...</p>
+      <p></p>
   </div>
   <div class="col-md-8 ">
     <div class="pull-right">
@@ -34,16 +34,7 @@ home
     </div>
 
   </div>
-
-</div>
-<div id="menun"> <br />
-<ul class="nav nav-tabs">
-  <li class="active"><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
-  <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
-  <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
-</ul>
-</div><br />
-
+</div><hr />
 
 <div class="row">
   

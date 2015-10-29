@@ -7157,7 +7157,7 @@ fieldset[disabled] .navbar .btn-link:focus {
 .text-info {
   color: #03a9f4;
 }
-.nav-tabs {
+/*.nav-tabs {
   background: #009688;
 }
 .nav-tabs > li > a {
@@ -7180,7 +7180,7 @@ fieldset[disabled] .navbar .btn-link:focus {
 .nav-tabs > li.disabled > a,
 .nav-tabs > li.disabled > a:hover {
   color: rgba(255, 255, 255, 0.5);
-}
+}*/
 .popover,
 .tooltip-inner {
   color: #ececec;
