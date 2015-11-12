@@ -15,7 +15,8 @@
 Route::get('/', function () {
 
     $data['users'] = User::all();
-    $data['questions'] = Question::paginate(10);
+    //$data['questions'] = DB::select( DB::raw("SELECT * FROM  `questions` ORDER BY  `created_at` DESC LIMIT 1") );
+    $data['questions'] = Question::orderBy('created_at', 'desc')->paginate(10);
     $data['count'] = Question::all()->count();
 
         return View::make('site.home')->with($data);
@@ -24,7 +25,7 @@ Route::get('/', function () {
 Route::get('questions', function () {
 
     $data['users'] = User::all();
-    $data['questions'] = Question::paginate(10);
+    $data['questions'] = Question::orderBy('created_at', 'desc')->paginate(10);
     $data['count'] = Question::all()->count();
 
     return View::make('site.questions')->with($data);
@@ -36,7 +37,7 @@ Route::get('question/{id}/{slug}', function ($id, $slug) {
     $data['users'] = User::all();
     $data['qvotes'] = Qvote::where('question_id', '=', $id)->get();
     $data['question'] = Question::find($id);
-    $data['answers'] = Answer::where('question_id', '=', $id)->get();
+    $data['answers'] = Answer::where('question_id', '=', $id)->orderBy('votes', 'desc')->get();
     $data['count'] = Answer::where('question_id', '=', $id)->count();
     //where('publish', '=', 'on')->orderBy('created_at', 'desc')->paginate(8);
     //$data['answers'] = DB::select( DB::raw("SELECT * FROM answers WHERE `question_id` = $id") );
@@ -55,7 +56,21 @@ Route::get('user/{id}/{slug}', function ($id, $slug) {
 
     $data['user'] = User::find($id);
 
-        return $data['user'];
+    //return var_dump($data['user']->website);
+
+    return View::make('profile.index')->with($data);
+});
+
+Route::get('activity/{id}/{slug}', function ($id, $slug) {
+
+    $data['user'] = User::find($id);
+    $data['userQustions'] = Question::where('user_id', '=', $id)->orderBy('created_at', 'desc')->paginate(4);
+    $data['questionsCount'] = $data['userQustions']->count();
+
+    $data['userAnswers'] = Answer::where('user_id', '=', $id)->orderBy('created_at', 'desc')->paginate(4);
+    $data['answersCount'] = $data['userAnswers']->count();
+
+        return View::make('profile.activity')->with($data);
 });
 
 Route::get('unanswer', function () {
@@ -131,8 +146,7 @@ Route::group(array('before' => 'auth'), function(){
 
     Route::get('date', function () {
 
-        //$data = date("F j, Y, g:i a");
-        $data = date('g:i a');
+        $data = date("F j, Y, g:i a");
 
         return $data;
         

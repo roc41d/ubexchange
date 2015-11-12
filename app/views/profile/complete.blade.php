@@ -46,7 +46,7 @@ complete profile
           </div>
     </div>
 
-  <!-- modal for mobile money to paypal transction -->
+  <!-- modal for profile photo upload -->
         <div class="modal fade" id="form">
           <div class="modal-dialog">
             <div class="modal-content">

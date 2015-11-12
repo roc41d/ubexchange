@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://ubexchange.dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Africa/Douala',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -192,7 +192,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Image' 			=> 'Intervention\Image\Facades\Image',
-		'Identicon'  => 'Irazasyed\LaravelIdenticon\Facade',
+		'Identicon'  		=> 'Irazasyed\LaravelIdenticon\Facade',
 
 	),
 

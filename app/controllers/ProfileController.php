@@ -1,7 +1,6 @@
 <?php
 
-class ProfileController extends BaseController
-{
+class ProfileController extends BaseController {
 
     public function __construct() {
         //$this->filter('before', 'auth');
@@ -81,10 +80,83 @@ class ProfileController extends BaseController
         return View::make('profile.activity')->with($data);
     }
 
+    //=====================================================
+    //  edit profile
+    //=====================================================
     public function getEditprofile() {
 
-        return View::make('profile.editprofile');
+        $data['user'] = User::find(Auth::user()->id);
+
+        return View::make('profile.editprofile')->with($data);
     }
+
+    public function postUploadedit(){
+        //$destinationPath = 'photo/';
+        $userEdit = User::find(Auth::user()->id);
+
+        // delete existing logo if any
+        if ($userEdit->photo != null) {
+            File::delete('photo/'.$userEdit->photo);
+            File::delete('photo/'.$userEdit->photo_thumbnail);
+        }
+
+        // uploading and setting of new logo
+        $photo = bin2hex(openssl_random_pseudo_bytes(20)). '_'. '.'.Input::file('photo')->getClientOriginalExtension();
+        $photo_thumbnail = bin2hex(openssl_random_pseudo_bytes(20)). '_'. 'thumbnail'. '.'.Input::file('photo')->getClientOriginalExtension();
+        Input::file('photo')->move('photo/', $photo);
+        File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
+
+        Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
+
+        $userEdit->photo = $photo;
+        $userEdit->photo_thumbnail = $photo_thumbnail;
+        $userEdit->save();
+
+        return Redirect::back();
+        
+    }
+
+    public function postPublicinfo(){
+
+        $userToUpdate = User::find(Auth::user()->id);
+        $userToUpdate->name = Input::get('name');
+        $userToUpdate->faculty = Input::get('faculty');
+        $userToUpdate->about = Input::get('about_me');
+        $userToUpdate->save();
+
+        return Redirect::back();
+    }
+
+    public function postWebpresence(){
+
+        $userToUpdate = User::find(Auth::user()->id);
+        $userToUpdate->website = Input::get('website');
+        $userToUpdate->git = Input::get('git');
+        $userToUpdate->twitter = Input::get('twitter');
+        $userToUpdate->save();
+        return Redirect::back();
+    }
+
+    public function postPrivateinfo(){
+
+        $userToUpdate = User::find(Auth::user()->id);
+        $userToUpdate->real_name = Input::get('name');
+        $userToUpdate->email = Input::get('email');
+        $userToUpdate->save();
+        return Redirect::back();
+    }
+
+    public function getDeleteprofile(){
+
+        $userTodelete = User::find(Auth::user()->id);
+        $userTodelete->delete();
+
+        return Redirect::to('/');    
+    }
+    //=====================================================
+    //  end edit profile
+    //=====================================================
 
     //=====================================================
     //  change user password
@@ -195,7 +267,7 @@ class ProfileController extends BaseController
             $questionToEdit->title = Input::get('title');
             $questionToEdit->description = Input::get('body');
             $questionToEdit->user_edit_id = Auth::user()->id;
-            $questionToEdit->edit_time = date("F jS, Y -- g:i A");
+            $questionToEdit->edit_time = new DateTime();
             $questionToEdit->save();
             
 
@@ -225,7 +297,6 @@ class ProfileController extends BaseController
             $answer->description = Input::get('answer');
             $answer->save();
             
-
             return Redirect::back()->with('alertMessage',"answer posted successfully.");
         }
 
@@ -252,10 +323,9 @@ class ProfileController extends BaseController
             $answerToEdit = Answer::find(Input::get('special'));
             $answerToEdit->description = Input::get('answer');
             $answerToEdit->user_edit_id = Auth::user()->id;
-            $answerToEdit->edit_time = date("F j, Y, g:i a");
+            $answerToEdit->edit_time = new DateTime();
             $answerToEdit->save();
             
-
             return Redirect::to('profile')->with('alertMessage',"question edited successfully.");
         }
 

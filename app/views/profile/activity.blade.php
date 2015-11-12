@@ -36,6 +36,7 @@ activity
   </div>
 
 </div>
+@if(Auth::check())
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
   <li><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
@@ -43,6 +44,14 @@ activity
   <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
 </ul>
 </div><br />
+@else
+<div id="menun"> <br />
+<ul class="nav nav-tabs">
+  <li><a href="{{URL::to('user/' .$user->id . '/' .$user->name)}}"><small>Profile</small></a></li>
+  <li class="active"><a href="{{URL::to('activity/' .$user->id . '/' .$user->name)}}"><small>Activity</small></a></li>
+</ul>
+</div><br />
+@endif
 
 
 <div class="row">

@@ -43,14 +43,14 @@ login
                           </div>
                       </div>
                       <div class="form-group">
-                          <label for="inputEmail" class="control-label">Password</label>
+                          <label for="inputEmail" class="control-label">Password (<a href="{{URL::to('remind')}}"><small>forgot password</small></a>)</label>
                           <div class="">
                             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="********">
                           </div>
                       </div>
                       <div class="form-group">
                            <div class="">
-                              <a href="{{URL::to('remind')}}" class="btn btn-danger">Forgot Password</a>
+                              <!--<a href="{{URL::to('remind')}}" class="btn btn-danger">Forgot Password</a>-->
                               <button type="submit" class="btn btn-primary pull-right">Log in</button>
                           </div>
                       </div>

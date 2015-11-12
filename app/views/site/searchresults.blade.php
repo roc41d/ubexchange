@@ -46,7 +46,7 @@ search
                 <input type="text" class="form-control" name="search" value="{{Input::get('search')}}" placeholder="Keywords">
                 <span class="input-group-btn" style="padding-left: 15px;">
                   <button class="btn btn-primary" type="submit">
-                      <span><i class="fa fa-search"></i>search</span>
+                      <span><i class="fa fa-search"></i> search</span>
                   </button>
                 </span>
               </div><!-- /input-group -->

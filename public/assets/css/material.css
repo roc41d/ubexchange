@@ -5533,7 +5533,7 @@ select.form-control.focus {
 }
 legend {
   border-bottom: 0;
-}
+}/*
 .list-group {
   border-radius: 0;
 }
@@ -5645,7 +5645,7 @@ legend {
   width: calc(100% - 90px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   float: right;
-}
+}*/
 .navbar {
   background-color: #009688;
   border: 0;

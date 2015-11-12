@@ -8,10 +8,10 @@
 
 		<div>
 			Hi {{$name}},<br>
-			Welcome to <a href="#">techexchange</a>, please follow the link below to activate your account.<br><br>
+			Welcome to <a href="#">ubexchange</a>, please follow the link below to activate your account.<br><br>
 			To activate your account, follow link: {{ URL::to('activate/'.$link)}}.<br/>
-			If you did not register at <a href="#">techexchange</a>, please ignore this email.<br><br>
+			If you did not register at <a href="#">ubexchange</a>, please ignore this email.<br><br>
 		</div>
-		<h3>techexchange team</h3>
+		<h3>ubexchange</h3>
 	</body>
 </html>

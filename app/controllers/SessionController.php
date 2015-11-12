@@ -24,10 +24,12 @@ class SessionController extends BaseController {
 		    }
 
 		    //$data = date("F j, Y, g:i a");
-		    $userToLoggin = User::where('email', '=', Input::get('email'))->first();
-		    $userToLoggin->last_login = date("F j, Y, g:i a");
-		    $userToLoggin->save();
+		    //$userToLoggin = User::where('email', '=', Input::get('email'))->first();
+		    //$userToLoggin->last_login = date("F j, Y, g:i a");
+		    //$userToLoggin->save();
 		     // redirect user to profile page
+		    Auth::user()->last_login = new DateTime();
+    		Auth::user()->save();
 		    return Redirect::to('profile');
 		}
 
@@ -138,9 +140,6 @@ class SessionController extends BaseController {
 	             );
 
                 return Redirect::back()->with('alertMessage', 'a link has been send to your email to reset your password.');
-
-
-
 
             } else {
                 return Redirect::back()->with('alertError', 'we can not find a user with that email address.');
