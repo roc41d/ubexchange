@@ -36,7 +36,7 @@
 
 </head>
 <body>
-<div class="navbar navbar-defualt">
+<div class="navbar navbar-fixed navbar-defualt">
     <div class="container">
         <div class="navbar-header ">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -59,9 +59,9 @@
                 <li class="dropdown">
                     <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                    <!--<img src="{{URL::to('gravatar')}}/image_thumbnail.png" class="img-rounded" id="imgswag" />
-                    {{Auth::user()->name}} -->
-                    <i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}}
+                    <img src="{{URL::to('photo/'.Auth::user()->photo_thumbnail)}}" class="img-rounded" id="imgeswag" />
+                    {{Auth::user()->name}}
+                    <!--<i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}}-->
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{URL::to('profile')}}"><i class="fa fa-gear"></i>&nbsp;&nbsp;settings</a></li>

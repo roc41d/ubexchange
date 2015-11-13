@@ -43,6 +43,7 @@ edit answer
               <div class="panel-body">
                   {{Form::open(array('url'=>'profile/editanswer'))}}
                       <input type="hidden" name="special"  value="{{$answerToEdit->id}}" />
+                      <input type="hidden" name="qID"  value="{{$questionToEdit}}" />
                       <div class="form-group">
                             <div class="">
                               <textarea class="form-control" name="answer" id="answer" rows="7">{{$answerToEdit->description}}</textarea>

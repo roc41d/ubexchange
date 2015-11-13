@@ -36,7 +36,7 @@ activity
   </div>
 
 </div>
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->id == $user->id)
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
   <li><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
@@ -82,7 +82,7 @@ activity
         <div class="col-md-6">
           <h5 class="activityswag">{{$answersCount}} Answers</h5>
           @foreach($userAnswers as $answer)
-            {{-- <p>{{$answer->user_id}}</p> --}}
+            <p>{{$question->find($answer->user_id)->title}}</p>
           @endforeach
             <a href="#" class="">more ..</a>
         </div> <br />

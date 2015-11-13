@@ -42,9 +42,9 @@
 
       <div class="row">
         <div class="col-sm-1" id="votes">
-            <a href="{{URL::to('votes/upvotequestion/'. $question->id)}}" title="This question shows research effort; it is useful and clear"><i class="fa fa-chevron-up" ></i></a><br />
+            <a href="{{URL::to('votes/upvotequestion/'. $question->id)}}" title="This question shows research effort; it is useful and clear" style="color: grey"><i class="fa fa-chevron-up" ></i></a><br />
             {{$question->votes}}<br />
-            <a href="{{URL::to('votes/downvotequestion/'. $question->id)}}" title="This question does not show research effort; it is unclear and not useful"><i class="fa fa-chevron-down" ></i></a>
+            <a href="{{URL::to('votes/downvotequestion/'. $question->id)}}" title="This question does not show research effort; it is unclear and not useful" style="color: grey"><i class="fa fa-chevron-down" ></i></a>
         </div>
         
         <div class="col-sm-11" id="q">
@@ -65,14 +65,22 @@
       @foreach($answers as $answer)
       <div class="row">
         <div class="col-sm-1" id="votes">
-            <a href="{{URL::to('votes/upvoteanswer/'. $answer->id)}}" title="This question shows research effort; it is useful and clear"><i class="fa fa-chevron-up" ></i></a><br />
+            <a href="{{URL::to('votes/upvoteanswer/'. $answer->id)}}" title="This question shows research effort; it is useful and clear" style="color: grey"><i class="fa fa-chevron-up" ></i></a><br />
             {{$answer->votes}}<br />
-            <a href="{{URL::to('votes/downvoteanswer/'. $answer->id)}}" title="This question does not show research effort; it is unclear and not useful"><i class="fa fa-chevron-down" ></i></a>
+            <a href="{{URL::to('votes/downvoteanswer/'. $answer->id)}}" title="This question does not show research effort; it is unclear and not useful" style="color: grey"><i class="fa fa-chevron-down" ></i></a><br />     
+          @if($answer->status != NULL)
+            <i class="fa fa-check-square fa-2x accept"></i>
+          @endif    
         </div>
         <div class="col-sm-11" id="q">
           <p>{{$answer->description}}</p>
           @if(Auth::check())
-          <small><a href="{{URL::to('profile/editanswer/'. $answer->id)}}">edit</a></small>
+            <small><a href="{{URL::to('profile/editanswer/'. $answer->id. '/'.$question->id)}}">edit</a></small>
+
+            @if($question->status == NULL && Auth::user()->id == $users->find($question->user_id)->id)
+            <small id="acceptswag"><a href="{{URL::to('profile/acceptanswer/'. $answer->id. '/'. $question->id)}}">accept answer</a></small>
+            @endif
+
           @endif
           <p class="pull-right">
             @if($answer->user_edit_id > 0)

@@ -2,6 +2,21 @@ body{
   	background-color: #ffffff;
 }
 
+.navbar-fixed {
+  position: relative;
+  height: 56px;
+  z-index: 998; }
+  .navbar-fixed nav {
+    position: fixed; }
+
+@media only screen and (min-width : 601px) {
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 64px;
+    line-height: 64px; }
+  .navbar-fixed {
+    height: 64px; } }
+
+
 #mylable{
 	height: 40px
 }
@@ -21,7 +36,7 @@ i {
 
 #votes{
 	text-align: center;
-	border: 1px solid gray;
+	/*border: 1px solid gray;*/
 	padding-top: 10px;
 	padding-bottom: 10px;
 	font-size: 20px;
@@ -42,6 +57,9 @@ i {
 
 #editbyswag{
 	padding-right: 30px;
+}
+#acceptswag{
+	padding-left: 30px;
 }
 
 #imageswag{
@@ -80,4 +98,12 @@ i {
 #editswag{
 	text-align: center;
 	padding-bottom: 10px;
+}
+
+.accept{
+	color: #009688;
+}
+
+#q{
+	border-left: 1px solid #eee;
 }

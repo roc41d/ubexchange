@@ -3,7 +3,7 @@
 {{-- web site title --}}
 @section('title')
 @parent
-user
+{{$user->name}}
 @stop
 
 {{-- website content --}}
@@ -36,14 +36,14 @@ user
   </div>
 
 </div>
-@if(Auth::check())
-<div id="menun"> <br />
-<ul class="nav nav-tabs">
-  <li class="active"><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
-  <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
-  <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
-</ul>
-</div><br />
+@if(Auth::check() && Auth::user()->id == $user->id)
+  <div id="menun"> <br />
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
+    <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
+    <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
+  </ul>
+  </div><br />
 @else
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
