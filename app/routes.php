@@ -75,9 +75,11 @@ Route::get('activity/{id}/{slug}', function ($id, $slug) {
 
 Route::get('unanswer', function () {
 
-    $data['unanswer'] = Question::where('solved', '=', '0')->get();
+    $data['users'] = User::all();
+    $data['unanswer'] = Question::where('status', '=', NULL)->paginate(10);
+    $data['count'] = $data['unanswer']->count();
 
-    return $data['unanswer'];
+    return View::make('site.unansweredquestions')->with($data);
 });
 
 Route::get('search', function () {
@@ -152,9 +154,13 @@ Route::group(array('before' => 'auth'), function(){
         
 });
 
-    Route::get('complete', function () {
+    Route::get('answers', function () {
 
-        return View::make('profile.complete');
+        $data['answers'] = DB::select( DB::raw("SELECT 'q.title' FROM questions q, answers a WHERE 'q.id' = 'a.question_id'") );
+
+        return $data['answers'];
+
+        //SELECT * FROM questions q, answers a WHERE q.id = a.question_id
         
 });
 

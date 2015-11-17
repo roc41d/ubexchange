@@ -49,6 +49,9 @@ home
 <div class="row">
     <div class="col-sm-9">
       <h3>Recently Asked Questions</h3><hr />
+      @if($count == 0)
+        <h5>No question(s) available.</h5>
+      @endif
       @foreach($questions as $question)
       <div class="row">
         <div class="col-sm-1" id="questions">

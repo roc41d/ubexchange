@@ -38,7 +38,7 @@ class ProfileController extends BaseController {
         File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
 
         Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
-        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
+        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
 
         $userEdit->photo = $photo;
         $userEdit->photo_thumbnail = $photo_thumbnail;
@@ -71,7 +71,7 @@ class ProfileController extends BaseController {
     }
 
     public function getActivity() {
-        //$data['user'] = User::find(Auth::user()->id);
+        $data['user'] = User::find(Auth::user()->id);
         $data['userQustions'] = Question::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->paginate(4);
         $data['questionsCount'] = $data['userQustions']->count();
 
@@ -108,7 +108,7 @@ class ProfileController extends BaseController {
         File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
 
         Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
-        Image::make('photo/'.$photo_thumbnail)->resize(38, 38)->save('photo/'.$photo_thumbnail);
+        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
 
         $userEdit->photo = $photo;
         $userEdit->photo_thumbnail = $photo_thumbnail;

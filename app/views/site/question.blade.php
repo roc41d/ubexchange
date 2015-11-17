@@ -77,7 +77,7 @@
           @if(Auth::check())
             <small><a href="{{URL::to('profile/editanswer/'. $answer->id. '/'.$question->id)}}">edit</a></small>
 
-            @if($question->status == NULL && Auth::user()->id == $users->find($question->user_id)->id)
+             @if($question->status == NULL && Auth::user()->id == $users->find($question->user_id)->id)
             <small id="acceptswag"><a href="{{URL::to('profile/acceptanswer/'. $answer->id. '/'. $question->id)}}">accept answer</a></small>
             @endif
 
@@ -99,6 +99,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3>Your Answer</h3></div>
                   <div class="panel-body">
+                    <div class="well">
+                        <p>Under the <b>Formate</b> menu, you will find some usefull tags that will help you formate your answer.</p>
+                        <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your answer.</p>
+                    </div>
                     {{Form::open(array('url'=>'profile/answer'))}}
                         <input type="hidden" name="special"  value="{{$question->id}}" />
                         <div class="form-group">
@@ -109,7 +113,7 @@
                         </div>
                         <div class="form-group">
                             <div class="">
-                              <button type="submit" class="btn btn-success pull-right">Post Your Answer</button>
+                              <button type="submit" class="btn btn-primary pull-right">Post Your Answer</button>
                             </div>
                         </div>
                     {{Form::close()}}

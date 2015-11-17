@@ -58,7 +58,7 @@ home
                       </div>
                       <div class="form-group">
                           <div class="">
-                            <button type="submit" class="btn btn-success pull-right">Post Your Question</button>
+                            <button type="submit" class="btn btn-primary pull-right">Post Your Question</button>
                           </div>
                       </div>
                   </form>
@@ -67,7 +67,17 @@ home
   </div>
 
   <div class="col-sm-3">
-        <img src="http://placehold.it/260x500">
+    <div class="well">
+        <h3>How to Ask</h3>
+        <p><b>Is your question about programming?</b></p>
+        <p>We prefer questions that can be answered, not just discussed.</p>
+        <p>Provide details. Share your research.</p>
     </div>
+    <div class="well">
+        <h3>How to Format</h3>
+        <p>Under the <b>Formate</b> menu, you will find some usefull tags that will help you formate your question.</p>
+        <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your question.</p>
+    </div>
+  </div>
 </div>
 @stop

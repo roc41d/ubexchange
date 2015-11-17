@@ -1,0 +1,24 @@
+/*css for error pages*/
+h1 {
+	font-size: 100px;
+}
+#four-o-four {
+	background-color: #3498db;
+	text-align: center;
+	padding-top: 100px;
+}
+#four-o-three {
+	background-color: #2ecc71;
+	text-align: center;
+	padding-top: 100px;
+}
+#five-o-o {
+	background-color: #e74c3c;
+	text-align: center;
+	padding-top: 100px;
+}
+#default {
+	background-color: #e74c3c;
+	text-align: center;
+	padding-top: 100px;
+}

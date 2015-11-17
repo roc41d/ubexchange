@@ -25,7 +25,7 @@ activity
 
 <div class="row">
   <div class="col-md-4">
-      <p>some text ...</p>
+
   </div>
   <div class="col-md-8 ">
     <div class="pull-right">
@@ -39,7 +39,6 @@ activity
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
   <li><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
-  <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
   <li class="active"><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
 </ul>
 </div><br />
@@ -48,9 +47,8 @@ activity
   
   <div class="col-sm-3 list-group">
   <a class="list-group-item" href="{{URL::to('profile/editprofile')}}" id="pronavswag"><i class="fa fa-edit fa-fw"></i>&nbsp; Edit Profile</a>
-  <a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; </a>
-  <a class="list-group-item" href="#"><i class="fa fa-gears fa-fw"></i>&nbsp; Change Password</a>
-  <a class="list-group-item" href="{{URL::to('profile/deleteprofile')}}" onclick='return confirm("Are you sure you want to delete your profile?")'><i class="fa fa-trash fa-fw"></i>&nbsp; Delete Profile</a>
+  <a class="list-group-item" href="{{URL::to('profile/settings')}}"><i class="fa fa-gears fa-fw"></i>&nbsp; Change Password</a>
+  {{-- <a class="list-group-item" href="{{URL::to('profile/deleteprofile')}}" onclick='return confirm("Are you sure you want to delete your profile?")'><i class="fa fa-trash fa-fw"></i>&nbsp; Delete Profile</a> --}}
 </div>
 
   <div class="col-sm-9">

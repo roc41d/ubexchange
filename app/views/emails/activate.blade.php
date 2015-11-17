@@ -10,7 +10,7 @@
 			Hi {{$name}},<br>
 			Welcome to <a href="#">ubexchange</a>, please follow the link below to activate your account.<br><br>
 			To activate your account, follow link: {{ URL::to('activate/'.$link)}}.<br/>
-			If you did not register at <a href="#">ubexchange</a>, please ignore this email.<br><br>
+			If you did not register at <a href="http://ubex.nuketeck.com/">ubexchange</a>, please ignore this email.<br><br>
 		</div>
 		<h3>ubexchange</h3>
 	</body>

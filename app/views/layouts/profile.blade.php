@@ -58,10 +58,7 @@
                 @if(Auth::check())
                 <li class="dropdown">
                     <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                    <img src="{{URL::to('photo/'.Auth::user()->photo_thumbnail)}}" class="img-rounded" id="imgeswag" />
                     {{Auth::user()->name}}
-                    <!--<i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}}-->
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{URL::to('profile')}}"><i class="fa fa-gear"></i>&nbsp;&nbsp;settings</a></li>

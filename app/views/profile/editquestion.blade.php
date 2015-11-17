@@ -61,7 +61,7 @@ edit question
                       <div class="form-group">
                           <div class="">
                             <a href="{{URL::to('')}}" class="btn btn-primary">Cancel</a>
-                            <button type="submit" class="btn btn-success pull-right">Save Edits</button>
+                            <button type="submit" class="btn btn-primary pull-right">Save Edits</button>
                           </div>
                       </div>
                   </form>
@@ -69,7 +69,8 @@ edit question
       </div>
   </div>
 
-  <div class="col-sm-3 well">
+  <div class="col-sm-3">
+    <div class="well">
         <h3>How to Edit</h3>
         <ul>
           <li>fix grammatical or spelling errors</li>
@@ -79,5 +80,11 @@ edit question
           <li><b><em>always respect</em></b> the original author</li>
         </ul>
     </div>
+    <div class="well">
+        <h3>How to Format</h3>
+        <p>Under the <b>Formate</b> menu, you will find some usefull tags that will help you formate your question.</p>
+        <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your question.</p>
+    </div>
+  </div>
 </div>
 @stop

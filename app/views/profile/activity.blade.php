@@ -25,7 +25,7 @@ activity
 
 <div class="row">
   <div class="col-md-4">
-      <p>some text ...</p>
+
   </div>
   <div class="col-md-8 ">
     <div class="pull-right">

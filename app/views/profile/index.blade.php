@@ -25,7 +25,7 @@
 
 <div class="row">
   <div class="col-md-4">
-      <p>some text ...</p>
+
   </div>
   <div class="col-md-8 ">
     <div class="pull-right">
@@ -40,7 +40,7 @@
   <div id="menun"> <br />
   <ul class="nav nav-tabs">
     <li class="active"><a href="{{URL::to('profile')}}"><small>Profile</small></a></li>
-    <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li>
+    {{-- <li><a href="{{URL::to('profile/activity')}}"><small>Activity</small></a></li> --}}
     <li><a href="{{URL::to('profile/editprofile')}}"><small>Profile & Settings</small></a></li>
   </ul>
   </div><br />
@@ -48,7 +48,7 @@
 <div id="menun"> <br />
 <ul class="nav nav-tabs">
   <li class="active"><a href="{{URL::to('user/' .$user->id . '/' .$user->name)}}"><small>Profile</small></a></li>
-  <li><a href="{{URL::to('activity/' .$user->id . '/' .$user->name)}}"><small>Activity</small></a></li>
+  {{-- <li><a href="{{URL::to('activity/' .$user->id . '/' .$user->name)}}"><small>Activity</small></a></li> --}}
 </ul>
 </div><br />
 @endif
@@ -68,8 +68,8 @@
         <div class="row" id="profilepad">
             <div class="col-sm-2" id="editswag" style="border: 1px solid #eee;"><br />
               <img src="{{URL::to('photo/'.$user->photo)}}" class="img-rounded" id="imageswag" /><br />
-              <h3>1</h3>
-              <small>REPUTATION</small>
+              {{-- <h3>1</h3>
+              <small>REPUTATION</small> --}}
             </div>
           <div class="col-sm-7">
             <h4>{{$user->name}}</h4>

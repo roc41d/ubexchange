@@ -55,7 +55,7 @@
 
                 @if(Auth::check())
                 <li class="dropdown">
-                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" style="font-size:18px;" ></i>&nbsp;&nbsp;{{Auth::user()->name}} <b class="caret"></b></a>
+                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{URL::to('profile')}}"><i class="fa fa-gear"></i>&nbsp;&nbsp;settings</a></li>
                         <li class="divider"></li>

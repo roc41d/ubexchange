@@ -8,6 +8,13 @@ class VoteController extends BaseController {
 			return Redirect::back()->with('alertError', "you have to be logged in to perform this action.");
 		}
 
+		$data['question'] = Question::find($id);
+
+		//return $data['question']->user_id . '==' . Auth::user()->id;
+		if ($data['question']->user_id == Auth::user()->id) {
+			return Redirect::back()->with('alertError', "You can not upvote your own question.");
+		}
+
 		$hasUserVoted = Qvote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('question_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			
@@ -39,6 +46,13 @@ class VoteController extends BaseController {
 			return Redirect::back()->with('alertError', "you have to be logged in to perform this action.");
 		}
 
+		$data['question'] = Question::find($id);
+
+		//return $data['question']->user_id . '==' . Auth::user()->id;
+		if ($data['question']->user_id == Auth::user()->id) {
+			return Redirect::back()->with('alertError', "You can not downvote your own question.");
+		}
+
 		$hasUserVoted = Qvote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('question_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			$vote =  new Qvote();
@@ -64,6 +78,13 @@ class VoteController extends BaseController {
 			return Redirect::back()->with('alertError', "you have to be logged in to perform this action.");
 		}
 
+		$data['answer'] = Answer::find($id);
+
+		//return $data['answer']->user_id . '==' . Auth::user()->id;
+		if ($data['answer']->user_id == Auth::user()->id) {
+			return Redirect::back()->with('alertError', "You can not upvote your own answer.");
+		}
+
 		$hasUserVoted = Avote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('answer_id', '=', $id)->count();
 		if ($hasUserVoted == 0) {
 			
@@ -87,6 +108,13 @@ class VoteController extends BaseController {
 
 		if (Auth::check() == NULL) {
 			return Redirect::back()->with('alertError', "you have to be logged in to perform this action.");
+		}
+
+		$data['answer'] = Answer::find($id);
+
+		//return $data['answer']->user_id . '==' . Auth::user()->id;
+		if ($data['answer']->user_id == Auth::user()->id) {
+			return Redirect::back()->with('alertError', "You can not downvote your own answer.");
 		}
 
 		$hasUserVoted = Avote::where('user_id', '=', User::find(Auth::user()->id)->id)->where('answer_id', '=', $id)->count();

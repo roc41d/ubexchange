@@ -61,7 +61,8 @@ edit answer
       </div>
   </div>
 
-  <div class="col-sm-3 well">
+  <div class="col-sm-3">
+    <div class="well">
         <h3>How to Edit</h3>
         <ul>
           <li>fix grammatical or spelling errors</li>
@@ -71,5 +72,11 @@ edit answer
           <li><b><em>always respect</em></b> the original author</li>
         </ul>
     </div>
+    <div class="well">
+        <h3>How to Format</h3>
+        <p>Under the <b>Formate</b> menu, you will some usefull tags that will help you formate your answer.</p>
+        <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your answer.</p>
+    </div>
+  </div>
 </div>
 @stop

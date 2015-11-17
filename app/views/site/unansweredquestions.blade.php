@@ -38,11 +38,11 @@ home
 
 <div class="row">
     <div class="col-sm-9">
-      <h3>All Questions</h3><hr />
+      <h3>Unanswered Questions</h3><hr />
       @if($count == 0)
         <h5>No question(s) available.</h5>
       @endif
-      @foreach($questions as $question)
+      @foreach($unanswer as $question)
       <div class="row">
         <div class="col-sm-1" id="questions">
             {{$question->votes}}<br />
@@ -57,7 +57,7 @@ home
         </div>
       </div><hr >
        @endforeach
-       {{$questions->links()}}
+       {{$unanswer->links()}}
 
 
 
@@ -66,7 +66,7 @@ home
     <div class="col-sm-3">
         <h4>
           {{$count}}<br />
-          <small>questions</small>
+          <small>question(s) with no accepted answers</small>
         </h4>
         <img src="http://placehold.it/260x500">
     </div>
