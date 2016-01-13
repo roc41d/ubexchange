@@ -1,3 +1,3 @@
-## [ubexchange website](http://ubexchange.xyz).
+## [ubexchange website](http://ubexchange.xyz)
 
 
