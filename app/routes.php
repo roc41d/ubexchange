@@ -38,18 +38,17 @@ Route::get('question/{id}/{slug}', function ($id, $slug) {
     $data['qvotes'] = Qvote::where('question_id', '=', $id)->get();
     $data['question'] = Question::find($id);
     $data['answers'] = Answer::where('question_id', '=', $id)->orderBy('votes', 'desc')->get();
+    $data['comments'] = Comment::where('question_id', '=', $id)->orderBy('created_at', 'desc')->get();
     $data['count'] = Answer::where('question_id', '=', $id)->count();
-    //where('publish', '=', 'on')->orderBy('created_at', 'desc')->paginate(8);
-    //$data['answers'] = DB::select( DB::raw("SELECT * FROM answers WHERE `question_id` = $id") );
 
         return View::make('site.question')->with($data);
 });
 
 Route::get('users', function () {
 
-    $data['users'] = User::all();
+    $data['users'] = User::orderBy('reputation', 'desc')->paginate(20);
 
-        return $data['users'];
+        return View::make('site.users')->with($data);
 });
 
 Route::get('user/{id}/{slug}', function ($id, $slug) {
@@ -76,7 +75,7 @@ Route::get('activity/{id}/{slug}', function ($id, $slug) {
 Route::get('unanswer', function () {
 
     $data['users'] = User::all();
-    $data['unanswer'] = Question::where('status', '=', NULL)->paginate(10);
+    $data['unanswer'] = Question::where('status', '=', NULL)->orderBy('created_at', 'desc')->paginate(10);
     $data['count'] = $data['unanswer']->count();
 
     return View::make('site.unansweredquestions')->with($data);
@@ -139,20 +138,22 @@ Route::group(array('before' => 'auth'), function(){
 
 /*
     |--------------------------------------------------------------------------
+    | Profile Controller Routes
+    |--------------------------------------------------------------------------
+    |
+    | Routes to handle user profile
+    |
+    */
+    Route::controller('social', 'SocialController');
+
+/*
+    |--------------------------------------------------------------------------
     | Search Controller Routes
     |--------------------------------------------------------------------------
     |
     | Routes to handle questions and answers in the public area
     |
     */
-
-    Route::get('date', function () {
-
-        $data = date("F j, Y, g:i a");
-
-        return $data;
-        
-});
 
     Route::get('answers', function () {
 
@@ -162,6 +163,24 @@ Route::group(array('before' => 'auth'), function(){
 
         //SELECT * FROM questions q, answers a WHERE q.id = a.question_id
         
+});
+
+    Route::get('string', function () {
+
+    //$myString = "java, php, laravel, ci, html, c, c++, css, javascript";
+    //$myArray = explode(',', $myString);
+        $str="java, php, html, css, swift, javascript, xml";
+        $arr=explode(",",$str);
+
+        echo "<b>". $arr[0]. "<b>";
+        
+});
+
+
+Route::get('demo', function () {
+
+
+        return View::make('site.demo');
 });
 
     /*Route::get('photo', function () {

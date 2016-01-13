@@ -77,14 +77,12 @@ activity
               </div>
             </div><hr >
           @endforeach
-            <a href="#" class="">more ..</a>
         </div>
         <div class="col-md-6">
           <h5 class="activityswag">{{$answersCount}} Answers</h5>
-          @foreach($userAnswers as $answer)
-            <p>{{$question->find($answer->user_id)->title}}</p>
+          @foreach($userAnswers as $anwser)
+            <h5><a href="#">{{$anwser->question_title}}</a></h5>
           @endforeach
-            <a href="#" class="">more ..</a>
         </div> <br />
 
       </div><!--/panel-body-->

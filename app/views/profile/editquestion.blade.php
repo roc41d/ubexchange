@@ -47,7 +47,7 @@ edit question
                       <div class="form-group">
                           <label for="inputEmail" class="control-label">Title</label>
                           <div class="">
-                            <input type="text" class="form-control" id="inputEmail" name="title" value="{{ Input::old('title') != NULL ? Input::old('title') : $questionToEdit->title }}" placeholder="What's your programming question? Be specific.">
+                            <input type="text" class="form-control" id="inputEmail" name="title" value="{{ Input::old('title') != NULL ? Input::old('title') : $questionToEdit->title }}" placeholder="What's your programming question? Be specific." autofocus>
                             <span class="badge alert-danger">{{ ($errors->has('title') ? $errors->first('title') : '') }}</span>
                           </div>
                       </div>
@@ -82,7 +82,7 @@ edit question
     </div>
     <div class="well">
         <h3>How to Format</h3>
-        <p>Under the <b>Formate</b> menu, you will find some usefull tags that will help you formate your question.</p>
+        <p>Under the <b>Format</b> menu, you will find some usefull tags that will help you format your question.</p>
         <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your question.</p>
     </div>
   </div>

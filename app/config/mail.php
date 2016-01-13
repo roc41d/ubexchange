@@ -15,6 +15,7 @@ return array(
 	|
 	*/
 
+	//'driver' => 'smtp',
 	'driver' => 'smtp',
 
 	/*
@@ -28,7 +29,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	//'host' => 'smtp.gmail.com',
+	'host' => 'smtp.sendgrid.net',
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +82,8 @@ return array(
 	|
 	*/
 
-	'username' => 'sashaempty88@gmail.com',
+	//'username' => 'sashaempty88@gmail.com',
+	'username' => 'ubexchange',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +96,8 @@ return array(
 	|
 	*/
 
-	'password' => 'telefunk3n',
+	//'password' => 'telefunk3n',
+	'password' => 'elfonkeng1',
 
 	/*
 	|--------------------------------------------------------------------------

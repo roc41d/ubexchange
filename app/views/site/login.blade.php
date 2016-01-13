@@ -39,7 +39,7 @@ login
                       <div class="form-group">
                           <label for="inputEmail" class="control-label">Email</label>
                           <div class="">
-                              <input type="text" class="form-control" id="inputEmail" name="email" placeholder="you@example.com">
+                              <input type="text" class="form-control" id="inputEmail" name="email" placeholder="you@example.com" autofocus>
                           </div>
                       </div>
                       <div class="form-group">

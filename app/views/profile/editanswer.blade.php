@@ -74,8 +74,8 @@ edit answer
     </div>
     <div class="well">
         <h3>How to Format</h3>
-        <p>Under the <b>Formate</b> menu, you will some usefull tags that will help you formate your answer.</p>
-        <p>Please use the <b>Pre</b> tag which is located under <small><b>Formate ->Formats ->Blocks ->Pre</b></small> when adding source codes to your answer.</p>
+        <p>Under the <b>Format</b> menu, you will some usefull tags that will help you format your answer.</p>
+        <p>Please use the <b>Pre</b> tag which is located under <small><b>Format ->Formats ->Blocks ->Pre</b></small> when adding source codes to your answer.</p>
     </div>
   </div>
 </div>

@@ -8,7 +8,10 @@
 		"laravel/framework": "4.2.*",
 		"cviebrock/eloquent-sluggable": "~2.0",
 		"intervention/image": "~2.0",
-		"irazasyed/laravel-identicon": "~1.1"
+		"irazasyed/laravel-identicon": "~1.1",
+		"artdarek/oauth-4-laravel": "dev-master",
+		"rtablada/wardrobe-disqus": "dev-master",
+		"hybridauth/hybridauth": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

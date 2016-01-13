@@ -17,7 +17,7 @@ register
                       <div class="form-group">
                           <label for="inputEmail" class="control-label">Display Name</label>
                           <div class="">
-                            <input type="text" class="form-control" id="inputEmail" name="name" value="{{ Input::old('name') != NULL ? Input::old('name') : '' }}" placeholder="McRocard">
+                            <input type="text" class="form-control" id="inputEmail" name="name" value="{{ Input::old('name') != NULL ? Input::old('name') : '' }}" placeholder="McRocard" autofocus>
                             <span class="badge alert-danger">{{ ($errors->has('name') ? $errors->first('name') : '') }}</span>
                           </div>
                       </div>
@@ -55,6 +55,7 @@ register
                       </div>
                   </form>
               </div>
+
       </div>
   </div>
 

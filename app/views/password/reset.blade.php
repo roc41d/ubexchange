@@ -46,7 +46,7 @@ reset password
                       </div>
                       <div class="form-group">
                            <div class="">
-                              <button type="submit" class="btn btn-success pull-right">Reset</button>
+                              <button type="submit" class="btn btn-primary pull-right">Reset</button>
                           </div>
                       </div>
                   </form>

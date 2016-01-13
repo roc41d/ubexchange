@@ -2,11 +2,13 @@
 
 class SessionController extends BaseController {
 
+	// function for displaying login form
 	public function login() {	
 
 		return View::make('site.login');
 	}
 
+	// function for handling userLogin
 	public function handleLogin() {
 		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
 		{
@@ -23,11 +25,6 @@ class SessionController extends BaseController {
 		    	return Redirect::back()->with('alertError', "contact support@ubexchange.com, your account has been blocked.");
 		    }
 
-		    //$data = date("F j, Y, g:i a");
-		    //$userToLoggin = User::where('email', '=', Input::get('email'))->first();
-		    //$userToLoggin->last_login = date("F j, Y, g:i a");
-		    //$userToLoggin->save();
-		     // redirect user to profile page
 		    Auth::user()->last_login = new DateTime();
     		Auth::user()->save();
 		    return Redirect::to('profile');
@@ -39,10 +36,12 @@ class SessionController extends BaseController {
 
 	}
 
+	// function for displaying registration page
 	public function register() {	
 		return View::make('site.register');
 	}
 
+	// function for handling userRegistraton
 	public function handleRegister() {
 		$registerData = Input::all();
 		$registerRules = array(
@@ -79,11 +78,13 @@ class SessionController extends BaseController {
 		}
 	}
 
+	// function for handling Logout
 	public function logout() {
 		Auth::logout();
 		return Redirect::to('/');
 	}
 
+	// function for handling account activaton
 	public function activate($key) {
 		$activationCheck = User::where('activation_key','=',$key)->count();
 		if($activationCheck == 1) {
@@ -99,11 +100,13 @@ class SessionController extends BaseController {
 		
 	}
 
+	// function for displaying reset password form
 	public function remind(){
 
 		return View::make('site.remind');
 	}
 
+	// function for sending email for password reset
 	public function handleRemind(){
 
 		$validator = Validator::make(
@@ -149,6 +152,7 @@ class SessionController extends BaseController {
         }
 	}
 
+	// function for displaying reset page through email link
 	public function recovery($link){
 
 		$user = User::where('remind', '=', $link)->first();
@@ -164,6 +168,7 @@ class SessionController extends BaseController {
 
 	}
 
+	// function for handling reset password
 	public function handleRecovery(){
 
 		$messages = array(

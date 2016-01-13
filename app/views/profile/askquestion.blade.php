@@ -45,23 +45,26 @@ home
                       <div class="form-group">
                           <label for="inputEmail" class="control-label">Title</label>
                           <div class="">
-                            <input type="text" class="form-control" id="inputEmail" name="title" value="{{ Input::old('title') != NULL ? Input::old('title') : '' }}" placeholder="What's your programming question? Be specific.">
+                            <input type="text" class="form-control" id="inputEmail" name="title" value="{{ Input::old('title') != NULL ? Input::old('title') : '' }}" placeholder="What's your programming question? Be specific." autofocus>
                             <span class="badge alert-danger">{{ ($errors->has('title') ? $errors->first('title') : '') }}</span>
                           </div>
                       </div>
                       <div class="form-group">
-                          <label for="inputEmail" class="control-label">Body</label>
-                          <div class="">
-                            <textarea class="form-control" name="body" id="question" rows="7"></textarea>
+                          <label for="inputEmail" class="control-label"></label>
+                          <div class="wmd-panel1">
+                            <div id="wmd-button-bar-second" class="pagedown-swag"></div>
+                            <textarea class="wmd-input form-control" name="body" id="wmd-input-second" rows="10"></textarea>
                             <span class="badge alert-danger">{{ ($errors->has('body') ? $errors->first('body') : '') }}</span>
-                          </div>
+                          </div><br ><hr>
+
+                          <div id="wmd-preview-second" class="wmd-preview"></div><hr>
                       </div>
                       <div class="form-group">
                           <div class="">
                             <button type="submit" class="btn btn-primary pull-right">Post Your Question</button>
                           </div>
                       </div>
-                  </form>
+                  {{Form::close()}}
               </div>
       </div>
   </div>

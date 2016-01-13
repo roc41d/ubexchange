@@ -72,7 +72,7 @@ activity
                 <div class="form-group">
                     <label for="inputEmail" class="control-label">Display name</label>
                     <div class="">
-                      <input type="text" class="form-control" id="inputName" name="name" value="{{ Input::old('name') != NULL ? Input::old('name') : $user->name }}">
+                      <input type="text" class="form-control" id="inputName" name="name" value="{{ Input::old('name') != NULL ? Input::old('name') : $user->name }}" autofocus>
                       <span class="badge alert-danger">{{ ($errors->has('name') ? $errors->first('name') : '') }}</span>
                     </div>
                 </div>
@@ -108,20 +108,22 @@ activity
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-link fa-fw"></i></span>
-                    <input type="text" id="website" name="website" class="form-control" value="{{$user->website}}" placeholder="Website link">
+                    <input type="text" id="website" name="website" class="form-control" value="{{ Input::old('website') != NULL ? Input::old('website') : $user->website}}" placeholder="Website link">
                     <span class="badge alert-danger">{{ ($errors->has('website') ? $errors->first('website') : '') }}</span>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-github fa-fw"></i></span>
-                    <input type="text" id="email" name="git" class="form-control" value="{{$user->git}}" placeholder="GitHub link or username">
+                    <input type="text" id="email" name="git" class="form-control" value="{{ Input::old('git') != NULL ? Input::old('git') : $user->git}}" placeholder="GitHub link">
+                    <span class="badge alert-danger">{{ ($errors->has('git') ? $errors->first('git') : '') }}</span>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-twitter fa-fw"></i></span>
-                    <input type="text" id="email" name="twitter" class="form-control" value="{{$user->twitter}}" placeholder="Twitter link or username">
+                    <input type="text" id="twitter" name="twitter" class="form-control" value="{{ Input::old('twitter') != NULL ? Input::old('twitter') : $user->twitter}}" placeholder="Twitter link">
+                    <span class="badge alert-danger">{{ ($errors->has('twitter') ? $errors->first('twitter') : '') }}</span>
                 </div>
             </div>
             <div class="form-group">

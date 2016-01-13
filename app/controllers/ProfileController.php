@@ -6,6 +6,7 @@ class ProfileController extends BaseController {
         //$this->filter('before', 'auth');
     }
 
+    // function for displaying user index page
     public function getIndex() {
 
         $data['user'] = User::find(Auth::user()->id);
@@ -16,7 +17,7 @@ class ProfileController extends BaseController {
             $rand = rand(1, $data['count']);
             $data['gravatar'] = Gravatar::find($rand);
 
-            $data['imageData'] = Identicon::getImageData('rocard');
+            //$data['imageData'] = Identicon::getImageData('rocard');
             
             return View::make('profile.complete')->with($data);
         }
@@ -27,6 +28,7 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for handling photo when user complete profile registration
     public function postUploadpoto(){
         //$destinationPath = 'photo/';
         $userEdit = User::find(Auth::user()->id);
@@ -38,7 +40,7 @@ class ProfileController extends BaseController {
         File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
 
         Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
-        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
 
         $userEdit->photo = $photo;
         $userEdit->photo_thumbnail = $photo_thumbnail;
@@ -48,6 +50,7 @@ class ProfileController extends BaseController {
         
     }
 
+    // function for displaying complete registrattion page
     public function getCompleteregistration($id){
 
         $gravatar = Gravatar::find($id);
@@ -60,7 +63,7 @@ class ProfileController extends BaseController {
         File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
 
         Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
-        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
 
         $userEdit->photo = $photo;
         $userEdit->photo_thumbnail = $photo_thumbnail;
@@ -70,20 +73,20 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for displaying userActivity page
     public function getActivity() {
+        
         $data['user'] = User::find(Auth::user()->id);
-        $data['userQustions'] = Question::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->paginate(4);
+        $data['userQustions'] = Question::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->get();
         $data['questionsCount'] = $data['userQustions']->count();
 
-        $data['userAnswers'] = Answer::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->paginate(4);
+        $data['userAnswers'] = Answer::where('user_id', '=', User::find(Auth::user()->id)->id)->orderBy('created_at', 'desc')->get();
         $data['answersCount'] = $data['userAnswers']->count();
 
         return View::make('profile.activity')->with($data);
     }
 
-    //=====================================================
-    //  edit profile
-    //=====================================================
+    // function for displaying editUser page
     public function getEditprofile() {
 
         $data['user'] = User::find(Auth::user()->id);
@@ -91,6 +94,7 @@ class ProfileController extends BaseController {
         return View::make('profile.editprofile')->with($data);
     }
 
+    // function for handling photo upload during edit user process
     public function postUploadedit(){
         //$destinationPath = 'photo/';
         $userEdit = User::find(Auth::user()->id);
@@ -108,7 +112,7 @@ class ProfileController extends BaseController {
         File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
 
         Image::make('photo/'.$photo)->resize(300, 300)->save('photo/'.$photo);
-        Image::make('photo/'.$photo_thumbnail)->resize(32, 32)->save('photo/'.$photo_thumbnail);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
 
         $userEdit->photo = $photo;
         $userEdit->photo_thumbnail = $photo_thumbnail;
@@ -118,6 +122,7 @@ class ProfileController extends BaseController {
         
     }
 
+    // function for handling userPublic info
     public function postPublicinfo(){
 
         $userToUpdate = User::find(Auth::user()->id);
@@ -129,7 +134,20 @@ class ProfileController extends BaseController {
         return Redirect::back();
     }
 
+    // function for handling userWebPresence info
     public function postWebpresence(){
+        $rules = array(
+            'website' => 'url',
+            "twitter" => 'url',
+            "git"      => 'url',
+            );
+        $messages = array(
+            'url' => 'add http://',
+            );
+        $theValidator = Validator::make(Input::all(), $rules, $messages);
+        if ($theValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($theValidator);
+        }
 
         $userToUpdate = User::find(Auth::user()->id);
         $userToUpdate->website = Input::get('website');
@@ -139,6 +157,7 @@ class ProfileController extends BaseController {
         return Redirect::back();
     }
 
+    // function for handling userPrivate info
     public function postPrivateinfo(){
 
         $userToUpdate = User::find(Auth::user()->id);
@@ -148,6 +167,7 @@ class ProfileController extends BaseController {
         return Redirect::back();
     }
 
+    // function for deleting user profile
     public function getDeleteprofile(){
 
         $userTodelete = User::find(Auth::user()->id);
@@ -155,18 +175,14 @@ class ProfileController extends BaseController {
 
         return Redirect::to('/');    
     }
-    //=====================================================
-    //  end edit profile
-    //=====================================================
 
-    //=====================================================
-    //  change user password
-    //=====================================================
+    // function for displaying form for user password change
     public function getSettings(){
         
         return View::make('password.account');
     }
 
+    // function for handling userPassword change
     public function postSettings(){
         
         $validator = Validator::make(Input::all(),
@@ -202,14 +218,7 @@ class ProfileController extends BaseController {
 
     }
 
-    //=====================================================
-    //  end change user password
-    //=====================================================
-
-
-    //=====================================================
-    //  ask question methods
-    //=====================================================
+    // function for displaying askQuestion form
     public function getAskquestion(){
 
         if (Auth::check()== NULL) {
@@ -222,6 +231,7 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for handling askQuestion
     public function postAskquestion(){
         $registerData = Input::all();
         $registerRules = array(
@@ -245,6 +255,7 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for displaying editQuestion form
     public function getEditquestion($id, $slug){
 
         $data['questionToEdit'] = Question::find($id);
@@ -253,6 +264,7 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for handling editQuestion
     public function postEditquestion(){
         $registerData = Input::all();
         $registerRules = array(
@@ -278,11 +290,7 @@ class ProfileController extends BaseController {
 
     }
 
-
-    //=====================================================
-    //  answer question methods
-    //=====================================================
-
+    // function for handling Answer
     public function postAnswer(){
         $registerData = Input::all();
         $registerRules = array(
@@ -293,17 +301,39 @@ class ProfileController extends BaseController {
             return Redirect::back()->withInput()->withErrors($registerValidator);
         }
         if($registerValidator->passes()) {
+            $q_data = Question::find(Input::get('special'));
+            
             $answer = new Answer();
             $answer->user_id = Auth::user()->id;
             $answer->question_id = Input::get('special');
             $answer->description = Input::get('answer');
+            $answer->question_title = $q_data->title;
             $answer->save();
+
+            // sent email to notify the user who asked the question
+            //$q_data = Question::find(Input::get('special'));
+            $user_data = User::find($q_data->user_id);
+
+            $mailData = array(
+                'name'=> $user_data->name,
+                'q_id'=> $q_data->id,
+                'q_slug' => $q_data->slug,
+                );
+            $mailMan = array('email' => $user_data->email);
+
+            Mail::send('emails.question_alert',$mailData, 
+                function($message) use ($mailMan) {
+                    $message->subject("ubexchange question alert");
+                    $message->to($mailMan['email']);
+                }
+            );
             
             return Redirect::back()->with('alertMessage',"answer posted successfully.");
         }
 
     }
 
+    // function for displaying editAnswer form
     public function getEditanswer($id, $qID){
 
         $data['answerToEdit'] = Answer::find($id);
@@ -313,6 +343,7 @@ class ProfileController extends BaseController {
 
     }
 
+    // function for handling editAswer
     public function postEditanswer(){
         $registerData = Input::all();
         $registerRules = array(
@@ -336,7 +367,8 @@ class ProfileController extends BaseController {
 
     }
 
-    public function getAcceptanswer($aID, $qID){
+    // function for handling acceptAnswer  and userReputation
+    public function getAcceptanswer($aID, $qID, $uID){
 
         //return $aID. ' '. $qID;
         $answerToAccept = Answer::find($aID);
@@ -347,7 +379,52 @@ class ProfileController extends BaseController {
         $questionToUpdate->status = 'solved';
         $questionToUpdate->save();
 
+        $userToUpdate = User::find($uID);
+        $reputation = $userToUpdate->reputation;
+        $userToUpdate->reputation = $reputation + 15;
+        $userToUpdate->save();
+
+        $answerReputation = new Areputation();
+        $answerReputation->user_id = $uID;
+        $answerReputation->answer_id = $aID;
+        $answerReputation->points = "+15";
+        $answerReputation->action = "accept";
+        $answerReputation->save();
+
+        $authReputation = new Areputation();
+        $authReputation->user_id = Auth::user()->id;
+        $authReputation->answer_id = $aID;
+        $authReputation->points = "+2";
+        $authReputation->action = "accept";
+        $authReputation->save();
+
+        $userReputation = User::find(Auth::user()->id);
+        $rep = $userReputation->reputation;
+        $userReputation->reputation = $rep + 2;
+        $userReputation->save();
+
         return Redirect::back();
+    }
+
+    // function for handling userComments
+    public function postComment() {
+        $commentData = Input::all();
+        $commentRules = array(
+            'comment'     =>'required',
+            );
+        $commentValidator = Validator::make($commentData,$commentRules);
+        if($commentValidator->fails()) {
+            return Redirect::back()->withInput()->withErrors($commentValidator);
+        }
+        if($commentValidator->passes()) {
+            $comment = new Comment();
+            $comment->user_id = Auth::user()->id;
+            $comment->question_id = Input::get('special');
+            $comment->comment = Input::get('comment');
+            $comment->save();
+            
+            return Redirect::back()->with('alertMessage',"comment posted successfully.");
+        }
     }
 
     

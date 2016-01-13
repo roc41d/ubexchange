@@ -40,7 +40,7 @@ remind
                     </div>
                     <div class="form-group">
                         <div class="">
-                            <button type="submit" class="btn btn-success pull-right">Send</button>
+                            <button type="submit" class="btn btn-primary pull-right">Send</button>
                         </div>
                     </div>
                 </form>

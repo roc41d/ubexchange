@@ -36,14 +36,59 @@ home
   </div>
 </div> <br />
 @if(Auth::check()==NULL)
-<div class="row" id="home">
-  <h1>Welcome!</h1>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="text-muted">Welcome!</h2>
     <p>
       ubexchange is a platform where computer enthusiasts all over the University of Buea can ask
       <em>programming related questions</em> and get answers from lecturers, experience programmers, and more.
     </p>
     <p><a href="{{URL::to('register')}}" class="btn btn-primary btn-lg">get started</a></p>
-</div><br />
+
+      <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+     
+
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="http://placehold.it/1200x315" alt="...">
+          <div class="carousel-caption">
+              <h3>Caption Text</h3>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/1200x315" alt="...">
+          <div class="carousel-caption">
+              <h3>Caption Text</h3>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/1200x315" alt="...">
+          <div class="carousel-caption">
+              <h3>Caption Text</h3>
+          </div>
+        </div>
+      </div>
+     
+
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="fa fa-angle-right-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="fa fa-angle-right"></span>
+      </a>
+    </div>  -->
+    <!-- Carousel -->
+
+  </div>
+</div>
+
+<br />
 @endif
 
 <div class="row">

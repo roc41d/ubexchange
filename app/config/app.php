@@ -124,6 +124,8 @@ return array(
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Irazasyed\LaravelIdenticon\ServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider',
+		'Rtablada\WardrobeDisqus\WardrobeDisqusServiceProvider',
 
 	),
 
@@ -193,6 +195,8 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Image' 			=> 'Intervention\Image\Facades\Image',
 		'Identicon'  		=> 'Irazasyed\LaravelIdenticon\Facade',
+		'OAuth' 			=> 'Artdarek\OAuth\Facade\OAuth',
+		'Disqus' => 'Rtablada\WardrobeDisqus\Facades\Disqus',
 
 	),
 

@@ -14,11 +14,16 @@
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/bootstrap.css" media="screen">
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/roboto.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material1.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/mystyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::to('assets')}}/pagedown/demo.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+    <!--<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>-->
+    <script src="{{URL::to('assets')}}/pagedown/Markdown.Converter.js"></script>
+    <script src="{{URL::to('assets')}}/pagedown/Markdown.Sanitizer.js"></script>
+    <script src="{{URL::to('assets')}}/pagedown/Markdown.Editor.js"></script>
+    <!--
     <script type="text/javascript">
     tinymce.init({
         selector: "textarea",
@@ -30,9 +35,7 @@
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
     </script>
-    <!--<script>tinymce.init({selector:'#question', valid_elements : '+*[*]'});</script> -->
-    <!--<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script> -->
+    -->
 
 </head>
 <body>
@@ -122,6 +125,28 @@
                 $this.addClass('active');
                 e.preventDefault();
             });
+        </script>
+        <script type="text/javascript">
+            (function () {
+                var converter2 = new Markdown.Converter();
+
+                converter2.hooks.chain("preConversion", function (text) {
+                    return text.replace(/\b(a\w*)/gi, "*$1*");
+                });
+
+                converter2.hooks.chain("plainLinkText", function (url) {
+                    return "This is a link to " + url.replace(/^https?:\/\//, "");
+                });
+                
+                var help = function () { alert("Do you need help?"); }
+                var options = {
+                    helpButton: { handler: help },
+                    strings: { quoteexample: "whatever you're quoting, put it right here" }
+                };
+                var editor2 = new Markdown.Editor(converter2, "-second", options);
+                
+                editor2.run();
+            })();
         </script>
 
 </body>
