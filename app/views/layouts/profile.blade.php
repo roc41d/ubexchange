@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/bootstrap.css" media="screen">
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/roboto.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material1.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::to('assets')}}/css/material.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/css/mystyle.css" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::to('assets')}}/pagedown/demo.css" rel="stylesheet">

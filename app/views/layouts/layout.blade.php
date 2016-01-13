@@ -61,8 +61,8 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check()==NULL)
                 <li><a href="{{URL::to('register')}}">sign up</a></li>
-                <!--<li><a href="{{URL::to('login')}}">log in</a></li>-->
-                <li><a href="#" data-toggle="modal" data-target="#complete-dialog">log in</a></li>
+                <li><a href="{{URL::to('login')}}">log in</a></li>
+                <!--<li><a href="#" data-toggle="modal" data-target="#complete-dialog">log in</a></li>
 
                 <div id="complete-dialog" class="modal fade" tabindex="-1">
                   <div class="modal-dialog">
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 @endif
 
                 @if(Auth::check())
