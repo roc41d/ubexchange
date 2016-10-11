@@ -1,3 +1,2 @@
 ## [ubexchange website](http://ubexchange.xyz)
-
-
+Ubex is a platform made by Rock4hrdo! With this platform, users in the University of Buea can ask any programming related questions they can think of. They can get these answers from many experienced people, such as lecturers, experience programmers, and a lot more. This can be extremely useful if you are having trouble with certain sections of your code and need assistance.
