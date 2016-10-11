@@ -193,6 +193,7 @@ class SessionController extends BaseController {
         	$userToUpdate->save();
 
         	return 'done.'; //to user profile index page
+        	//return Redirect::to('login')->with('alertMessage',"password reseted successfully. Login now!!!");
         }
 	}
 }

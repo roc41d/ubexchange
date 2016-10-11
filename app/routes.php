@@ -11,6 +11,17 @@
 |
 */
 
+Route::get('mail', function () {
+
+    Mail::send('emails.test', array(), function($message)
+    {
+        //$message->from('support@cortana.dev', 'c01tana Ltd');
+        $message->to('rocardpp@gmail.com', 'rocard')->subject('test mail');
+    });
+
+    return 'done.';
+});
+
 
 Route::get('/', function () {
 
@@ -179,8 +190,11 @@ Route::group(array('before' => 'auth'), function(){
 
 Route::get('demo', function () {
 
+    Mail::send('emails.test', array('key' => 'value'), function($message)
+    {
+        $message->to('rocardpp@gmail.com', 'c01tana')->subject('Welcome!');
+    });
 
-        return View::make('site.demo');
 });
 
     /*Route::get('photo', function () {
