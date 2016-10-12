@@ -59,6 +59,7 @@
               <small>ask {{date("F jS -- g:i A",strtotime($question->created_at))}} by: <a href="{{URL::to('user/'. $question->user_id. '/'. $users->find($question->user_id)->name)}}">{{$users->find($question->user_id)->name}}</a></small>
           </p><br /><br />
 
+          <!-- addthis buttons -->
           <div class="addthis_native_toolbox"></div><br /><hr>
 
           @foreach($comments as $comment)

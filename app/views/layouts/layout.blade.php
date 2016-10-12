@@ -44,7 +44,7 @@
     -->
 </head>
 <body>
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- javascript include for addthis api -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5644f2e2fdc6d289" async="async"></script>
 
 <div class="navbar navbar-default ">
@@ -144,7 +144,6 @@
 
     <script src="{{URL::to('assets')}}/js/ripples.min.js"></script>
     <script src="{{URL::to('assets')}}/js/material.min.js"></script>
-    <script id="dsq-count-scr" src="//ubexchange.disqus.com/count.js" async></script>
         <script>
             $(document).ready(function() {
                 // This command is used to initialize some elements and make them work properly
