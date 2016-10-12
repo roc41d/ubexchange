@@ -11,7 +11,8 @@
 		"irazasyed/laravel-identicon": "~1.1",
 		"artdarek/oauth-4-laravel": "dev-master",
 		"rtablada/wardrobe-disqus": "dev-master",
-		"hybridauth/hybridauth": "dev-master"
+		"hybridauth/hybridauth": "dev-master",
+		"xethron/migrations-generator": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

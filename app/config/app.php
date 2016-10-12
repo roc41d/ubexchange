@@ -126,6 +126,8 @@ return array(
 		'Irazasyed\LaravelIdenticon\ServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Rtablada\WardrobeDisqus\WardrobeDisqusServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
+		'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
 
 	),
 
