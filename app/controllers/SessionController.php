@@ -58,10 +58,10 @@ class SessionController extends BaseController {
 			$user->email = Input::get('email');
 			$user->password = Hash::make(Input::get('password'));
 			$user->activation_key = bin2hex(openssl_random_pseudo_bytes(16));
-			$user->activation_state = "off";
+			$user->activation_state = "on";
 			$user->save();
 			// send activation link
-			$mailData = array(
+			/*$mailData = array(
 				'name'=> Input::get('name'),
 				'link'=> $user->activation_key
 				);
@@ -70,7 +70,7 @@ class SessionController extends BaseController {
 					$message->subject("ubexchange account activation");
 					$message->to(Input::get('email'));
 				}
-			);
+			);*/
 			return Redirect::to('login')->with('alertMessage',"check email, to activate account.");
 		}
 		if($registerValidator->fails()) {
